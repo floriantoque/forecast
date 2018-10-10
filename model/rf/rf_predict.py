@@ -30,12 +30,14 @@ end_date = config['end_date']
 path_to_save_prediction = config['path_to_save_prediction']
 model_path = config['model_path']
 rf_object_learned_path = config['rf_object_learned_path']
+time_step_second = config['time_step_second']
 
 assert (exogenous_data_path != None) &  (model_path != None) & (start_date != None) & (end_date != None) &\
        (path_to_save_prediction != None) & (rf_object_learned_path != None),\
        'Configuration is not well defined, every variable have to be different of None'
 
-
+if observation_data_path == None:
+    assert(time_step_second != None)
 
 print ("Loading the model...")
 my_model = load_pickle(model_path)
@@ -61,14 +63,21 @@ if create_prediction:
 
     print ("Prediction...")
     if observation_data_path == None:
-        list_date = build_date_list(start_date,end_date)
+        list_date = build_timestamp_list(start_date, end_date, time_step_second)
     else:
         list_date = read_csv_list(observation_data_path)[["Datetime"]].set_index("Datetime")[start_date:end_date].\
             reset_index()["Datetime"].values.tolist()
 
     rf = load_pickle(rf_object_learned_path)
-    df_X = read_csv_list(exogenous_data_path).set_index('Datetime').ix[list_date]
-    X = df_X[my_model.infos['features']].values
+    df_X = read_csv_list(exogenous_data_path).set_index('Datetime')[my_model.infos['features']].ix[list_date]
+
+    for d in df_X[df_X.isnull().any(axis=1)].index.values:
+        print('Datetime {} will not be predicted because it is not in exogenous data or observation data'.format(d))
+
+    df_X = df_X.dropna()
+    list_date = df_X.index.values.tolist()
+
+    X = df_X.values
 
     pred = my_model.predict(rf, X)
 
@@ -82,7 +91,7 @@ if create_prediction:
     if not os.path.exists(path_directory_to_save):
         os.makedirs(path_directory_to_save)
 
-    df_res.to_csv(path_directory_to_save+ start_date.split(" ")[0] +"_"+ end_date.split(" ")[0]+'.csv', index=False)
+    df_res.to_csv(path_directory_to_save + start_date.split(" ")[0] + "_" + end_date.split(" ")[0] + '.csv', index=False)
 
     print ("Saving the prediction done")
 

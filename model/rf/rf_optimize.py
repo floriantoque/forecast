@@ -65,7 +65,8 @@ if create_model:
 
     print('Read data: observation and exogenous')
 
-    df_Xy = read_csv_list(observation_data_path).set_index('Datetime').join(read_csv_list(exogenous_data_path).set_index('Datetime'))[start_date:end_date]
+    all_f = list(set([e for i in features_list for e in i]))
+    df_Xy = read_csv_list(observation_data_path).set_index('Datetime').join(read_csv_list(exogenous_data_path).set_index('Datetime'))[start_date:end_date].dropna()
 
     X_list = [df_Xy[features].values for features in features_list]
     y = df_Xy[time_series].values

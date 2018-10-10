@@ -67,7 +67,7 @@ if create_model:
     df_observation = read_csv_list(observation_data_path)
     df_exogenous = read_csv_list(exogenous_data_path)
 
-    df_Xy = df_observation.set_index('Datetime').join(df_exogenous.set_index("Datetime"))[start_date:end_date]
+    df_Xy = df_observation.set_index('Datetime')[time_series].join(df_exogenous.set_index("Datetime")).dropna()[start_date:end_date]
 
     X = df_Xy[features].values
     y = df_Xy[time_series].values

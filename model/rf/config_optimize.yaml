@@ -49,21 +49,20 @@
 #scaler_choice : minmax
 
 
-observation_data_path: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016_2017_sumpass.csv']
-exogenous_data_path: ['/home/toque/data2/date/2013-01-01-2019-01-01_new.csv']
-features_list: [['hms_int_15min', 'Day_id'],
-                ['hms_int_15min', 'Day_id', 'Mois_id', 'vac_noel_quebec', 'day_off_quebec', '24DEC', '31DEC'],
-                ['hms_int_15min', 'Day_id', 'Mois_id', 'vac_noel_quebec', 'day_off_quebec', '24DEC', '31DEC',
-                 'renov_beaubien'],
-                ['hms_int_15min', 'Day_id', 'Mois_id', 'vac_noel_quebec', 'day_off_quebec', '24DEC', '31DEC',
-                 'renov_beaubien', 'vac_udem1', 'vac_udem2']]
+observation_data_path: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016_2017_sumpass_nodayfree.csv']
+exogenous_data_path: ['/home/toque/data2/date/2013-01-01-2019-01-01_new.csv',
+                      '/home/toque/data2/weather/predicted_weather/predicted_weather_2015_2017_included_perday_am.csv',
+                      '/home/toque/data2/weather/predicted_weather/predicted_weather_2015_2017_included_perday_pm.csv',
+                      '/home/toque/data2/weather/predicted_weather/predicted_weather_2015_2017_included_perhour.csv']
+features_list: [['hms_int_15min','Day_id', 'Mois_id','vac_noel_quebec', 'day_off_quebec', '24DEC', '31DEC',
+                 'renov_beaubien', 'vac_udem1', 'vac_udem2', 'Temperature_celcius']]
 time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13', '14',
               '1', '9', '5', '18', '36', '24', '68', '43', '8', '64', '10', '55', '3',
               '49', '51', '2', '19', '56', '7', '6', '4', '48', '66', '25', '23', '28',
               '39', '54', '60', '27', '20', '46', '12', '21', '62', '52', '41', '50', '30',
               '16', '37', '40', '26', '67', '57', '61', '42', '45', '38', '29', '58', '63',
               '22', '59', '53', '17']
-model_name: lt_rf_mtl
+model_name: mt_rf_mtl_predweatherhour_dropnaexogenousweather
 path_to_save: '/home/toque/data2/forecast/model/rf/optimize/'
 start_date: '2015-01-01 00:00:00'
 end_date: '2016-12-31 23:45:00'
@@ -73,7 +72,7 @@ param_kfold:
     random_state: 0
 param_grid:
     n_estimators: [100,150,200]
-    max_features: ['auto','sqrt']
+    max_features: ['auto',null]
     max_depth: [null]
     min_samples_split: [2,5,10]
     min_samples_leaf: [1,5,10]
@@ -82,4 +81,4 @@ param_grid:
 scoring: "neg_mean_squared_error"
 scaler_choice: "standard"
 
-
+#'hms_int_15min',

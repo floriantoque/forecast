@@ -66,9 +66,11 @@ if create_prediction:
             reset_index()["Datetime"].values.tolist()
 
 
-    X = read_csv_list(exogenous_data_path).set_index('Datetime').ix[list_date][my_model.infos['features']].values
-    pred_mean = my_model.predict(X, choice='mean')
-    pred_median = my_model.predict(X, choice='median')
+    X = read_csv_list(exogenous_data_path).set_index('Datetime').ix[list_date].dropna()[my_model.infos['features']]
+    list_date = X.index.values.tolist()
+
+    pred_mean = my_model.predict(X.values, choice='mean')
+    pred_median = my_model.predict(X.values, choice='median')
 
     print ("Prediction done")
 

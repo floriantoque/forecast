@@ -87,7 +87,7 @@ if (path_grid_search_dict != None) & (model_path != None) :
         print('Read data: observation and exogenous')
         df_Xy = read_csv_list(my_model.infos['observation_data_path']).set_index("Datetime").join(
             read_csv_list(my_model.infos['exogenous_data_path']).set_index("Datetime"))[
-            my_model.infos['start_date']:my_model.infos['end_date']]
+            my_model.infos['start_date']:my_model.infos['end_date']].dropna()
 
         X = df_Xy[my_model.infos['features']].values
         y = df_Xy[my_model.infos['time_series']].values
@@ -110,7 +110,7 @@ else:
     if fit_model:
         print('Read data: observation and exogenous')
         df_Xy = read_csv_list(observation_data_path).set_index("Datetime").join(
-            read_csv_list(exogenous_data_path).set_index("Datetime"))[start_date:end_date]
+            read_csv_list(exogenous_data_path).set_index("Datetime"))[start_date:end_date].dropna()
 
         X = df_Xy[features].values
         y = df_Xy[time_series].values

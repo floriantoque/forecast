@@ -24,8 +24,8 @@ Functions
 AT = 5
 
 def get_list_common_date(start, end, obs, list_df_pred):
-    df = obs[['Datetime']].set_index('Datetime')[start:end]
-    df = df.join([df_[['Datetime']].set_index('Datetime') for df_ in list_df_pred])
+    df = pd.concat([obs[['Datetime']].set_index('Datetime')[start:end]]+
+                   [df_[['Datetime']].set_index('Datetime') for df_ in list_df_pred], axis=1, join='inner')
     return df.index.values.astype(str)
 
 
@@ -43,11 +43,11 @@ def mae(obs, pred):
 
 def mape_at(obs, pred):
     mask = obs >= AT
-    return (np.absolute(pred[mask] - obs[mask]) / obs[mask]).mean()
+    return ((np.absolute(pred[mask] - obs[mask]) / obs[mask]).mean())*100
 
 
-def get_errors(obs, list_df_pred, list_name_pred, list_date, errors=[rmse, mae, mse, mape_at],
-               errors_name=['rmse', 'mae', 'mse', 'mape_at' + str(AT)], ):
+def get_errors(obs, list_df_pred, list_name_pred, list_date, errors=[rmse, mae, mape_at, mse],
+               errors_name=['rmse', 'mae', 'mape_at' + str(AT), 'mse'], ):
     data = []
     columns = ['model'] + errors_name
     obs = obs.set_index('Datetime').loc[list_date].values
@@ -89,7 +89,7 @@ with open(config_file, 'r') as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-
+AT = config['AT']
 start_date_train = config['start_date_train']
 end_date_train = config['end_date_train']
 start_date_test = config['start_date_test']
@@ -127,11 +127,13 @@ for df in list_df_pred:
 
 list_date_train = get_list_common_date(start_date_train, end_date_train, obs, list_df_pred)
 list_date_test = get_list_common_date(start_date_test, end_date_test, obs, list_df_pred)
+print(sorted(list(set([i[:10] for i in list_date_test]))))
+
 
 df_train_errors = get_errors(obs, list_df_pred, list_name_pred, list_date_train,
-                             errors_name=['rmse', 'mae', 'mse', 'mape_at' + str(AT)])
+                             errors_name=['rmse', 'mae', 'mape_at' + str(AT), 'mse'])
 df_test_errors = get_errors(obs, list_df_pred, list_name_pred, list_date_test,
-                            errors_name=['rmse', 'mae', 'mse', 'mape_at' + str(AT)])
+                            errors_name=['rmse', 'mae', 'mape_at' + str(AT), 'mse'])
 
 if not args.force:
     if not os.path.exists(directory_path_to_save + name_evaluation + '/'):
@@ -140,8 +142,8 @@ if not args.force:
         sys.exit()
 
 
-df_train_errors.to_csv(directory_path_to_save + name_evaluation + "/errors_trainset.csv", index=False)
-df_test_errors.to_csv(directory_path_to_save + name_evaluation + "/errors_testset.csv", index=False)
+df_train_errors.round(2).to_csv(directory_path_to_save + name_evaluation + "/errors_trainset.csv", index=False)
+df_test_errors.round(2).to_csv(directory_path_to_save + name_evaluation + "/errors_testset.csv", index=False)
 
 
 print('Evaluate (2/2) errors per time-series..')

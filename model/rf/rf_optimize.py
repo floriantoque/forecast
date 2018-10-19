@@ -2,6 +2,8 @@
         Load configuration of the model from yaml file
         Example:
         # python rf_optimize.py --config config_optimize.yaml
+
+        #python rf_optimize.py --config config_optimize.yaml --force True;rf_fit.py --config config_fit.yaml --force True;rf_predict.py --config config_predict.yaml --force True;
 """
 
 import yaml

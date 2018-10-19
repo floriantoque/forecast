@@ -21,8 +21,8 @@ path_to_save: '/home/toque/data2/forecast/model/rf/fit/'
 # WARNING : Everything None in A and nothing None in B or nothing None in A and everything None in B
 
 # A)
-path_grid_search_dict: '/home/toque/data2/forecast/model/rf/optimize/mt_rf_mtl_predweatherhour_dropnaexogenousweather/grid_search_dict.pkl'
-model_path: '/home/toque/data2/forecast/model/rf/optimize/mt_rf_mtl_predweatherhour_dropnaexogenousweather/mt_rf_mtl_predweatherhour_dropnaexogenousweather.pkl'
+path_grid_search_dict: '/home/toque/data2/forecast/model/rf/optimize/mt_rf_mtl_events2/grid_search_dict.pkl'
+model_path: '/home/toque/data2/forecast/model/rf/optimize/mt_rf_mtl_events2/mt_rf_mtl_events2.pkl'
 
 # B)
 observation_data_path:

@@ -45,12 +45,21 @@ param_kfold = config["param_kfold"]
 param_grid = config["param_grid"]
 scoring = config["scoring"]
 scaler_choice = config["scaler_choice"]
+tminus = config['tminus']
+tplus = config['tplus']
+features_window = config['features_window']
 
 
 assert ((observation_data_path != None) & (exogenous_data_path != None) & (features_list != None) &
            (time_series != None) & (model_name != None) & (start_date != None) & (end_date != None)  &
            (path_to_save != None) & (param_kfold != None) & (param_grid != None) & (scoring != None) &
            (scaler_choice != None) ),'Configuration not well defined'
+
+if tminus != None:
+    assert (tplus != None) & (features_window != None),'Configuration tminus, tplus, features_window not well defined'
+else:
+    assert (tplus == None) & (features_window == None),'Configuration tminus, tplus, features_window not well defined'
+
 
 path_directory_to_save = path_to_save + model_name + '/'
 
@@ -67,21 +76,34 @@ if create_model:
 
     print('Read data: observation and exogenous')
 
-    all_f = list(set([e for i in features_list for e in i]))
+    #all_f = list(set([e for i in features_list for e in i]))
     df_Xy = read_csv_list(observation_data_path).set_index('Datetime').join(read_csv_list(exogenous_data_path).set_index('Datetime'))[start_date:end_date].dropna()
 
-    X_list = [df_Xy[features].values for features in features_list]
-    y = df_Xy[time_series].values
+
+    if features_window==None:
+        X_list = [df_Xy[features].values for features in features_list]
+        y = df_Xy[time_series].values
+
+    else:
+        X_list = []
+        for features in features_list:
+            X,y,fname = window_Xy(df_Xy, time_series, features, features_window, tminus, tplus)
+            X_list.append(X)
+
 
     my_model = Rf_model(model_name, start_date, end_date, features_list, time_series, observation_data_path,
                         exogenous_data_path, scaler_choice)
+
+    my_model.infos['tminus'] = tminus
+    my_model.infos['tplus'] = tplus
+    my_model.infos['features_window'] = features_window
 
     print("Optimizing the model..")
     grid_search_dict = my_model.optimize(X_list, y, param_grid, param_kfold, scoring)
     print("Optimization done")
 
     print("Saving optimization result..")
-    save_pickle(path_directory_to_save+"grid_search_dict.pkl",grid_search_dict)
+    save_pickle(path_directory_to_save+"grid_search_dict.pkl", grid_search_dict)
     print("Saving optimization result done")
     
     print("Saving model..")

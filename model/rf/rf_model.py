@@ -85,7 +85,7 @@ class Rf_model(Forecast_model):
             os.makedirs(path_directory_to_save)
 
         with open(path_directory_to_save+self.infos['name']+'.pkl', 'wb') as pickle_file:
-            pickle.dump(self, pickle_file, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.infos, pickle_file, protocol=pickle.HIGHEST_PROTOCOL)
 
         if path_config_file != None:
             copyfile(path_config_file, path_directory_to_save+'/'+path_config_file.split('/')[-1])

@@ -7,6 +7,8 @@
 # end_date: format 'YYYY-MM-dd hh:mm:ss', ending date of the prediction
 # model_path: saved model file path (here pkl file)
 
+#python rf_optimize.py --config config_optimize.yaml --force True;python rf_fit.py --config config_fit.yaml --force True;python rf_predict.py --config config_predict.yaml --force True
+
 
 observation_data_path: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016_2017_sumpass_nodayfree.csv']
 #observation_data_path:
@@ -20,6 +22,6 @@ exogenous_data_path: ['/home/toque/data2/date/2013-01-01-2019-01-01_new.csv',
 path_to_save_prediction: /home/toque/data2/forecast/model/rf/prediction/
 start_date: '2015-01-01 00:00:00'
 end_date: '2017-12-31 23:45:00'
-model_path: '/home/toque/data2/forecast/model/rf/fit/mt_rf_mtl_events2/mt_rf_mtl_events2.pkl'
-rf_object_learned_path: '/home/toque/data2/forecast/model/rf/fit/mt_rf_mtl_events2/rf_object_learned.pkl'
+model_path: '/home/toque/data2/forecast/model/rf/fit/mt_rf_mtl_events_multi_10stops/mt_rf_mtl_events_multi_10stops.pkl'
+rf_object_learned_path: '/home/toque/data2/forecast/model/rf/fit/mt_rf_mtl_events_multi_10stops/rf_object_learned.pkl'
 time_step_second:

@@ -25,34 +25,37 @@ file_path_obs: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016
 #                 "/home/toque/data2/forecast/model/rf/prediction/mt_rf_mtl_gcca_per_hour_obs_agghour/2015-01-01_2017-12-31.csv",
 #                 "/home/toque/data2/forecast/model/rf/prediction/mt_rf_mtl_obs_agghour/2015-01-01_2017-12-31.csv"]
 file_path_pred: ['/home/toque/data2/forecast/model/ha/prediction/lt_ha_mtl_agghour_dropnaexogenousweather/2015-01-01_2017-12-31_mean.csv',
+                 '/home/toque/data2/forecast/model/rf/prediction/mt_rf_mtl_agghour_dropnaexogenousweather/2015-01-01_2017-12-31.csv',
                  '/home/toque/data2/forecast/model/rf/prediction/mt_rf_mtl_agghour_predweatherdaypm_dropnaexogenousweather/2015-01-01_2017-12-31.csv',
                  '/home/toque/data2/forecast/model/rf/prediction/mt_rf_mtl_agghour_predweatherhour_dropnaexogenousweather/2015-01-01_2017-12-31.csv',
-                 '/home/toque/data2/forecast/model/rf/prediction/mt_rf_mtl_agghour_dropnaexogenousweather/2015-01-01_2017-12-31.csv']
+                 '/home/toque/data2/forecast/model/rf/prediction/mt_rf_mtl_events_agghour/2015-01-01_2017-12-31.csv']
 #list_name_pred: ['lt_ha_mtl_agghour', 'lt_ha_mtl_agghour_delete', 'lt_rf_mtl_agghour','mt_rf_wheather_gcca_agghour', 'mt_rf_agghour']
-list_name_pred: ['lt_ha_mtl_agghour_dropnaexogenousweather', 'mt_rf_mtl_agghour_predweatherdaypm_dropnaexogenousweather',
-                 'mt_rf_mtl_agghour_predweatherhour_dropnaexogenousweather', 'mt_rf_mtl_agghour_dropnaexogenousweather']
+list_name_pred: ['lt_ha_mtl_agghour','lt_rf_mtl_agghour',
+                 'mt_rf_mtl_agghour_predweatherdaypm',
+                 'mt_rf_mtl_agghour_predweatherhour',
+                 'mt_rf_mtl_events_agghour']
 time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13', '14', '1', '9', '5', '18',
                '36', '24', '68', '43', '8', '64', '10', '55', '3', '49', '51', '2', '19', '56', '7', '6',
                '4', '48', '66', '25', '23', '28', '39', '54', '60', '27', '20', '46', '12', '21', '62', '52',
                '41', '50', '30', '16', '37', '40', '26', '67', '57', '61', '42', '45', '38', '29', '58',
                '63', '22', '59', '53', '17']
-time_series_name: ['Station Berri-UQAM', 'Station McGill', 'Station Guy-Concordia', 'Station Bonaventure',
-                   'Station Longueuil-Universite-de-Sherbrooke', 'Station Cote-Vertu', 'Station Place-des-Arts',
-                   'Station Peel', 'Station Atwater', 'Station Vendome', "Station Place-d'Armes",
-                   'Station Square-Victoria-OACI', 'Station Henri-Bourassa', 'Station Mont-Royal',
-                   'Station Jean-Talon', 'Station Honore-Beaugrand', 'Station Lionel-Groulx', 'Station Pie-IX',
-                   'Station Montmorency', 'Station Angrignon', 'Station Laurier', 'Station Saint-Michel',
-                   'Station Sherbrooke', 'Station Cote-des-Neiges', 'Station Cremazie', 'Station Snowdon',
-                   'Station Plamondon', 'Station Sauve', 'Station Radisson', 'Station Universite-de-Montreal',
-                   'Station Rosemont', 'Station Beaubien', 'Station Jarry', 'Station Villa-Maria', 'Station Cartier',
-                   'Station Joliette', 'Station Viau', 'Station Papineau', "Station De l'eglise", 'Station Du College',
-                   'Station Parc', 'Station Frontenac', 'Station Langelier', 'Station Place-Saint-Henri',
-                   'Station Champ-de-Mars', 'Station Cadillac', 'Station Fabre', 'Station Namur', 'Station Jolicoeur',
-                   'Station Cote-Sainte-Catherine', 'Station Saint-Laurent', "Station Lucien-L'Allier",
-                   'Station Charlevoix', 'Station Verdun', 'Station Prefontaine', 'Station De la Concorde',
-                   'Station edouard-Montpetit', 'Station De Castelnau', 'Station Monk', 'Station Jean-Drapeau',
-                   'Station LaSalle', 'Station Beaudry', 'Station Outremont', "Station D'Iberville",
-                   'Station Assomption', 'Station Acadie', 'Station De la Savane', 'Station Georges-Vanier']
+time_series_name: ['Berri-UQAM', 'McGill', 'Guy-Concordia', 'Bonaventure',
+                   'Longueuil', 'Cote-Vertu', 'Place-des-Arts',
+                   'Peel', 'Atwater', 'Vendome', "Place-d'Armes",
+                   'Square-Victoria', 'Henri-Bourassa', 'Mont-Royal',
+                   'Jean-Talon', 'Honore-Beaugrand', 'Lionel-Groulx', 'Pie-IX',
+                   'Montmorency', 'Angrignon', 'Laurier', 'Saint-Michel',
+                   'Sherbrooke', 'Cote-des-Neiges', 'Cremazie', 'Snowdon',
+                   'Plamondon', 'Sauve', 'Radisson', 'Univ-de-Montreal',
+                   'Rosemont', 'Beaubien', 'Jarry', 'Villa-Maria', 'Cartier',
+                   'Joliette', 'Viau', 'Papineau', "De l'eglise", 'Du College',
+                   'Parc', 'Frontenac', 'Langelier', 'Place-St-Henri',
+                   'Champ-de-Mars', 'Station Cadillac', 'Station Fabre', 'Namur', 'Jolicoeur',
+                   'Cote-Ste-Catherine', 'Saint-Laurent', "Lucien-L'Allier",
+                   'Charlevoix', 'Verdun', 'Prefontaine', 'De la Concorde',
+                   'edouard-Montpetit', 'De Castelnau', 'Station Monk', 'Jean-Drapeau',
+                   'LaSalle', 'Beaudry', 'Outremont', "D'Iberville",
+                   'Assomption', 'Acadie', 'De la Savane', 'Georges-Vanier']
 #time_series_name:
 directory_path_to_save:  '/home/toque/data2/forecast/evaluation/'
 name_evaluation: 'eval_forecast_mtl_metro_agghour'

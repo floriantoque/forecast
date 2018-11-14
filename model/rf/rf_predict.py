@@ -40,7 +40,33 @@ if observation_data_path == None:
     assert(time_step_second != None)
 
 print ("Loading the model...")
-my_model = load_pickle(model_path)
+infos = load_pickle(model_path)
+model_name = infos['name']
+start_date_learning = infos['start_date']
+end_date_learning = infos['end_date']
+features_list = infos['features_list']
+time_series = infos['time_series']
+observation_data_path_learning = infos['observation_data_path']
+exogenous_data_path_learning = infos['exogenous_data_path']
+scaler_choice = infos['scaler_choice']
+features = infos['features']
+best_params = infos['best_params']
+scaler = infos['scaler']
+tminus = infos['tminus']
+tplus = infos['tplus']
+features_window = infos['features_window']
+
+
+my_model = Rf_model(model_name, start_date_learning, end_date_learning, features_list, time_series, observation_data_path_learning,
+                    exogenous_data_path_learning, scaler_choice)
+
+my_model.infos['features'] = features
+my_model.infos['best_params'] = best_params
+my_model.infos['scaler'] = scaler
+my_model.infos['tminus'] = tminus
+my_model.infos['tplus'] = tplus
+my_model.infos['features_window'] = features_window
+
 print ("Loading the model done")
 
 path_directory_to_save = path_to_save_prediction + my_model.infos['name'] + '/'
@@ -56,6 +82,7 @@ if os.path.exists(path_directory_to_save) & (not (args.force)):
         "WARNING !!!!!!!\n"
         "The directory: {} already exists.\n"
         "Do you want to possibly erase and replace the prediction saved in this directory?".format(path_directory_to_save))
+
 
 
 
@@ -77,7 +104,11 @@ if create_prediction:
     df_X = df_X.dropna()
     list_date = df_X.index.values.tolist()
 
-    X = df_X.values
+    if features_window != None:
+        X, fname = window_X(df_X, features, features_window, tminus, tplus)
+        list_date = list_date[tminus:len(list_date)-tplus]
+    else:
+        X = df_X.values
 
     pred = my_model.predict(rf, X)
 
@@ -94,4 +125,3 @@ if create_prediction:
     df_res.to_csv(path_directory_to_save + start_date.split(" ")[0] + "_" + end_date.split(" ")[0] + '.csv', index=False)
 
     print ("Saving the prediction done")
-

@@ -15,6 +15,7 @@ from utils.utils import *
 
 import yaml
 import argparse
+from matplotlib.backends.backend_pdf import PdfPages
 
 
 """
@@ -120,7 +121,7 @@ obs = read_csv_list(file_path_obs)[['Datetime'] + time_series]
 list_df_pred = [read_csv_list([f])[['Datetime'] + time_series] for f in file_path_pred]
 
 
-print('Evaluate (1/2) global errors..')
+print('Evaluate (1/4) global errors..')
 
 for df in list_df_pred:
     assert ((df.columns != obs.columns.values).sum() == 0)
@@ -146,8 +147,8 @@ df_train_errors.round(2).to_csv(directory_path_to_save + name_evaluation + "/err
 df_test_errors.round(2).to_csv(directory_path_to_save + name_evaluation + "/errors_testset.csv", index=False)
 
 
-print('Evaluate (2/2) errors per time-series..')
-palette = sns.color_palette("hls",n_colors=20)
+print('Evaluate (2/4) mape per time-series..')
+palette = sns.color_palette("hls", n_colors=len(list_df_pred)+1)
 df_train_error_per_station = error_per_station(obs, list_df_pred, list_name_pred, list_date_train, error=mape_at)
 df_test_error_per_station = error_per_station(obs, list_df_pred, list_name_pred, list_date_test, error=mape_at)
 
@@ -163,7 +164,8 @@ sns.set_style('whitegrid')
 ax = plt.gca()
 kind = 'scatter'
 
-f = df_train_error_per_station.plot(figsize=(20, 4), kind=kind, x='__index__', y=list_name_pred[0], ax=ax, color=palette[0])
+f = df_train_error_per_station.plot(figsize=(20, 10), kind=kind, x='__index__', y=list_name_pred[0], ax=ax,
+                                    color=palette[0], style=".")
 for i, m in enumerate(list_name_pred[1:]):
     f = df_train_error_per_station.plot(kind=kind, x='__index__', y=m, ax=ax, color=palette[i+1])
 f.set_xticks(df_train_error_per_station['__index__'])
@@ -173,14 +175,15 @@ f.set_ylabel('MAPE@' + str(AT))
 
 ax.legend(list_name_pred)
 fig = f.get_figure()
-fig.savefig(directory_path_to_save + name_evaluation + "/errors_trainset_per_time_series.png", bbox_inches='tight')
+fig.savefig(directory_path_to_save + name_evaluation + "/mape_trainset_per_time_series.png", bbox_inches='tight')
 plt.close()
 
 sns.set_style('whitegrid')
 ax = plt.gca()
 kind = 'scatter'
 
-f = df_test_error_per_station.plot(figsize=(20, 4), kind=kind, x='__index__', y=list_name_pred[0], ax=ax, color=palette[0])
+f = df_test_error_per_station.plot(figsize=(20, 10), kind=kind, x='__index__', y=list_name_pred[0], ax=ax,
+                                   color=palette[0], style=".")
 for i, m in enumerate(list_name_pred[1:]):
     f = df_test_error_per_station.plot(kind=kind, x='__index__', y=m, ax=ax, color=palette[i+1])
 f.set_xticks(df_test_error_per_station['__index__'])
@@ -190,8 +193,117 @@ f.set_ylabel('MAPE@' + str(AT))
 
 ax.legend(list_name_pred)
 fig = f.get_figure()
-fig.savefig(directory_path_to_save + name_evaluation + "/errors_testset_per_time_series.png", bbox_inches='tight')
+fig.savefig(directory_path_to_save + name_evaluation + "/mape_testset_per_time_series.png", bbox_inches='tight')
 plt.close()
+
+
+print('Evaluate (3/4) rmse per time-series..')
+
+palette = sns.color_palette("hls", n_colors=len(list_df_pred)+1)
+df_train_error_per_station = error_per_station(obs, list_df_pred, list_name_pred, list_date_train, error=rmse)
+df_test_error_per_station = error_per_station(obs, list_df_pred, list_name_pred, list_date_test, error=rmse)
+
+if time_series_name != None:
+    dict_id_name = dict(zip(time_series, time_series_name))
+    df_train_error_per_station['__time_series__'] = [dict_id_name[i] for i in
+                                                     df_train_error_per_station['__time_series__'].values]
+    df_test_error_per_station['__time_series__'] = [dict_id_name[i] for i in
+                                                    df_test_error_per_station['__time_series__'].values]
+
+
+
+sns.set_style('whitegrid')
+ax = plt.gca()
+kind = 'scatter'
+
+f = df_train_error_per_station.plot(figsize=(20, 10), kind=kind, x='__index__', y=list_name_pred[0], ax=ax,
+                                    color=palette[0], style=".")
+for i, m in enumerate(list_name_pred[1:]):
+    f = df_train_error_per_station.plot(kind=kind, x='__index__', y=m, ax=ax, color=palette[i+1])
+f.set_xticks(df_train_error_per_station['__index__'])
+f.set_xticklabels(df_train_error_per_station['__time_series__'], rotation=90)
+f.set_xlabel('Time-series')
+f.set_ylabel('RMSE')
+
+ax.legend(list_name_pred)
+fig = f.get_figure()
+fig.savefig(directory_path_to_save + name_evaluation + "/rmse_trainset_per_time_series.png", bbox_inches='tight')
+plt.close()
+
+sns.set_style('whitegrid')
+ax = plt.gca()
+kind = 'scatter'
+
+f = df_test_error_per_station.plot(figsize=(20, 10), kind=kind, x='__index__', y=list_name_pred[0], ax=ax,
+                                   color=palette[0], style=".")
+for i, m in enumerate(list_name_pred[1:]):
+    f = df_test_error_per_station.plot(kind=kind, x='__index__', y=m, ax=ax, color=palette[i+1])
+f.set_xticks(df_test_error_per_station['__index__'])
+f.set_xticklabels(df_test_error_per_station['__time_series__'], rotation=90)
+f.set_xlabel('Time-series')
+f.set_ylabel('RMSE')
+
+ax.legend(list_name_pred)
+fig = f.get_figure()
+fig.savefig(directory_path_to_save + name_evaluation + "/rmse_testset_per_time_series.png", bbox_inches='tight')
+plt.close()
+
+
+
+
+print('Evaluate (4/4) mae per time-series..')
+
+palette = sns.color_palette("hls", n_colors=len(list_df_pred)+1)
+df_train_error_per_station = error_per_station(obs, list_df_pred, list_name_pred, list_date_train, error=mae)
+df_test_error_per_station = error_per_station(obs, list_df_pred, list_name_pred, list_date_test, error=mae)
+
+if time_series_name != None:
+    dict_id_name = dict(zip(time_series, time_series_name))
+    df_train_error_per_station['__time_series__'] = [dict_id_name[i] for i in
+                                                     df_train_error_per_station['__time_series__'].values]
+    df_test_error_per_station['__time_series__'] = [dict_id_name[i] for i in
+                                                    df_test_error_per_station['__time_series__'].values]
+
+
+
+sns.set_style('whitegrid')
+ax = plt.gca()
+kind = 'scatter'
+
+f = df_train_error_per_station.plot(figsize=(20, 10), kind=kind, x='__index__', y=list_name_pred[0], ax=ax,
+                                    color=palette[0], style=".")
+for i, m in enumerate(list_name_pred[1:]):
+    f = df_train_error_per_station.plot(kind=kind, x='__index__', y=m, ax=ax, color=palette[i+1])
+f.set_xticks(df_train_error_per_station['__index__'])
+f.set_xticklabels(df_train_error_per_station['__time_series__'], rotation=90)
+f.set_xlabel('Time-series')
+f.set_ylabel('MAE')
+
+ax.legend(list_name_pred)
+fig = f.get_figure()
+fig.savefig(directory_path_to_save + name_evaluation + "/mae_trainset_per_time_series.png", bbox_inches='tight')
+plt.close()
+
+sns.set_style('whitegrid')
+ax = plt.gca()
+kind = 'scatter'
+
+f = df_test_error_per_station.plot(figsize=(20, 10), kind=kind, x='__index__', y=list_name_pred[0], ax=ax,
+                                   color=palette[0], style=".")
+for i, m in enumerate(list_name_pred[1:]):
+    f = df_test_error_per_station.plot(kind=kind, x='__index__', y=m, ax=ax, color=palette[i+1])
+f.set_xticks(df_test_error_per_station['__index__'])
+f.set_xticklabels(df_test_error_per_station['__time_series__'], rotation=90)
+f.set_xlabel('Time-series')
+f.set_ylabel('MAE')
+
+ax.legend(list_name_pred)
+fig = f.get_figure()
+fig.savefig(directory_path_to_save + name_evaluation + "/mae_testset_per_time_series.png", bbox_inches='tight')
+plt.close()
+
+
+
 
 print('Evaluation done')
 

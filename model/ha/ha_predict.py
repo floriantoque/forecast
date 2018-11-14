@@ -66,7 +66,8 @@ if create_prediction:
             reset_index()["Datetime"].values.tolist()
 
 
-    X = read_csv_list(exogenous_data_path).set_index('Datetime').ix[list_date].dropna()[my_model.infos['features']]
+    #X = read_csv_list(exogenous_data_path).set_index('Datetime').ix[list_date].dropna()[my_model.infos['features']]
+    X = read_csv_list(exogenous_data_path).set_index('Datetime').ix[list_date][my_model.infos['features']]
     list_date = X.index.values.tolist()
 
     pred_mean = my_model.predict(X.values, choice='mean')
@@ -77,8 +78,8 @@ if create_prediction:
     data_mean = [[i] + list(j) for i, j in zip(list_date, list(pred_mean))]
     data_median = [[i] + list(j) for i, j in zip(list_date, list(pred_median))]
 
-    df_res_mean = pd.DataFrame(data=data_mean, columns=['Datetime']+my_model.infos['time_series']).round(2)
-    df_res_median = pd.DataFrame(data=data_median, columns=['Datetime']+my_model.infos['time_series']).round(2)
+    df_res_mean = pd.DataFrame(data=data_mean, columns=['Datetime'] + my_model.infos['time_series']).round(2)
+    df_res_median = pd.DataFrame(data=data_median, columns=['Datetime'] + my_model.infos['time_series']).round(2)
 
 
     #Save the prediction
@@ -87,7 +88,7 @@ if create_prediction:
     if not os.path.exists(path_directory_to_save):
         os.makedirs(path_directory_to_save)
 
-    df_res_mean.to_csv(path_directory_to_save+ start_date.split(" ")[0] +"_"+ end_date.split(" ")[0] + "_mean.csv",index=False)
+    df_res_mean.to_csv(path_directory_to_save + start_date.split(" ")[0] + "_" + end_date.split(" ")[0] + "_mean.csv",index=False)
     df_res_median.to_csv(path_directory_to_save + start_date.split(" ")[0] + "_" + end_date.split(" ")[0] + "_median.csv", index=False)
     print ("Saving the prediction done")
 

@@ -76,3 +76,80 @@ def nearest_tuple(tuple_list, tuple_):
     return tuple(sorted(list_, key=lambda x: x[0], reverse=True)[0][1])
 
 
+def window_Xy(df_Xy, time_series, features, features_window, tminus, tplus):
+    """
+            return X , y and fname (features name with lag window e.g., tminus=2 , tplus=0, f1 = [f1::t-2, f1::t-1,f1] )
+            :param df_Xy: dataframe with exogenous and observation value
+            :param time_series: used to create y
+            :param features: used as exogenous data
+            :param features_window: used as exogenous windowed data
+            :param tminus: window tminus (tO is not included)
+            :param tplus: window tplus (t0 is non included)
+            :return: X, y, fname
+    """
+    y = df_Xy[time_series].values[tminus:len(df_Xy) - tplus, :]
+    X = np.zeros((len(df_Xy) - (tminus + tplus), len(features) + len(features_window) * (tplus + tminus)))
+
+    cpt = 0
+    fname = []
+    for f in features:
+        if not f in features_window:
+            X[:, cpt] = df_Xy[f].values[tminus:len(df_Xy) - tplus]
+            cpt += 1
+            fname.append(f)
+        else:
+            X[:, cpt:cpt + tminus + tplus + 1] = np.array(
+                [df_Xy[f].values[i - tminus:i + (tplus + 1)] for i in range(tminus, len(df_Xy) - (tplus))])
+            cpt += tminus + tplus + 1
+            fname += [f + '::t-' + str(i) for i in range(1, tminus + 1)[::-1]] + [f] + [f + '::t+' + str(i) for i in
+                                                                                        range(1, tplus + 1)]
+
+    return X, y, fname
+
+def window_X(df_X, features, features_window, tminus, tplus):
+    """
+            return X and fname (features name with lag window e.g., tminus=2 , tplus=0, f1 = [f1::t-2, f1::t-1,f1] )
+            :param df_X: dataframe with exogenous
+            :param features: used as exogenous data
+            :param features_window: used as exogenous windowed data
+            :param tminus: window tminus (tO is not included)
+            :param tplus: window tplus (t0 is non included)
+            :return: X, fname
+    """
+
+    X = np.zeros((len(df_X) - (tminus + tplus), len(features) + len(features_window) * (tplus + tminus)))
+
+    cpt = 0
+    fname = []
+    for f in features:
+        if not f in features_window:
+            X[:, cpt] = df_X[f].values[tminus:len(df_X) - tplus]
+            cpt += 1
+            fname.append(f)
+        else:
+            X[:, cpt:cpt + tminus + tplus + 1] = np.array(
+                [df_X[f].values[i - tminus:i + (tplus + 1)] for i in range(tminus, len(df_X) - (tplus))])
+            cpt += tminus + tplus + 1
+            fname += [f + '::t-' + str(i) for i in range(1, tminus + 1)[::-1]] + [f] + [f + '::t+' + str(i) for i in
+                                                                                        range(1, tplus + 1)]
+
+    return X, fname
+
+
+AT = 5
+
+def mse(obs, pred):
+    return ((pred - obs) ** 2).mean()
+
+
+def rmse(obs, pred):
+    return np.sqrt(mse(obs, pred))
+
+
+def mae(obs, pred):
+    return np.absolute(pred - obs).mean()
+
+
+def mape_at(obs, pred):
+    mask = obs >= AT
+    return ((np.absolute(pred[mask] - obs[mask]) / obs[mask]).mean())*100

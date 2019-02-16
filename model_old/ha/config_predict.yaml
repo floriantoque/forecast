@@ -1,0 +1,18 @@
+# Configuration of the prediction
+
+# observation_data_path: None or csv file path with the dates to predict (header: 'Datetime', whatever)
+# exogenous_data_path: csv file path with the exogenous data (header: 'Datetime', 'feature_id1','feature_id2', ...)
+# path_to_save_prediction: path of the directory in which the prediction will be saved
+# start_date: format 'YYYY-MM-dd hh:mm:ss', starting date of the prediction
+# end_date: format 'YYYY-MM-dd hh:mm:ss', ending date of the prediction
+# model_path: saved model file path (here pkl file)
+
+
+observation_data_path: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016_2017_sumpass_nodayfree.csv']
+#observation_data_path:
+exogenous_data_path: ['/home/toque/data2/date/2013-01-01-2019-01-01_new.csv',
+                      '/home/toque/data2/montreal/events/data/clean/events_2015_2018_start_period_event_stopid_aggdaily.csv']
+path_to_save_prediction: /home/toque/data2/forecast/model/ha/prediction/
+start_date: '2015-01-01 00:00:00'
+end_date: '2017-12-31 23:45:00'
+model_path: '/home/toque/data2/forecast/model/ha/fit/mt_ha_mtl_events15/mt_ha_mtl_events15.pkl'

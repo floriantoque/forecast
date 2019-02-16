@@ -4,7 +4,7 @@
 
 import datetime as libdt
 import pytz
-
+import pandas as pd
 
 def build_timestamp_list(start, end, time_step_second=15*60):
     """
@@ -115,3 +115,9 @@ def get_day_string(day_id, fr=True):
     if fr:
         return dict_fr[day_id]
     return dict_en[day_id]
+
+def get_list_common_date(start, end, obs, list_df_pred):
+    df = pd.concat([obs[['Datetime']].set_index('Datetime')[start:end]]+
+                   [df_[['Datetime']].set_index('Datetime') for df_ in list_df_pred], axis=1, join='inner')
+    return df.index.values.astype(str)
+

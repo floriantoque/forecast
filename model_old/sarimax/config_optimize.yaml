@@ -1,0 +1,44 @@
+# Configuration of the optimization of the sarimax model
+
+
+observation_data_path: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016_2017_sumpass_nodayfree_aggdaily.csv']
+
+features_data_path: ['/home/toque/data2/date/2013-01-01-2019-01-01_new.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_start_event_stopid_aggdaily.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_end_event_stopid_aggdaily.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_period_event_stopid_aggdaily.csv',]
+                     
+features_todummy: ['Day_en', 'Mois']
+
+features_nottodummy: ['24DEC', '31DEC', 'day_off_quebec', 'renov_beaubien', 
+                      'vac_udem1', 'vac_udem2', 'vac_noel_quebec', 'Year',]
+
+time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13',
+              '14', '1', '9', '5', '18', '36', '24', '68', '43', '8', '64', '10',
+              '55', '3', '49', '51', '2', '19', '56', '7', '6', '4', '48', '66',
+              '25', '23', '28', '39', '54', '60', '27', '20', '46', '12', '21',
+              '62', '52', '41', '50', '30', '16', '37', '40', '26', '67', '57',
+              '61', '42', '45', '38', '29', '58', '63', '22', '59', '53', '17']
+
+model_name: 'sarimax_stm_aggday'
+
+path_model_optimization: '/home/toque/data2/forecast/model/sarimax/optimize/'
+
+param_grid:
+     p_params: [0, 7, 11]
+     d_params: [0]
+     q_params: [0, 1]
+     P_params: [0, 1, 7]
+     D_params: [0]
+     Q_params: [0] 
+     m_params: [0, 1, 7]
+     t_params: ['c','ct']
+     
+     
+start_train_list: ['2015-01-01', '2015-01-01', '2015-01-01', '2015-01-01']
+end_train_list: ['2016-01-01', '2016-04-01', '2016-07-01', '2016-10-01']
+end_val_list: ['2016-04-01', '2016-07-01', '2016-10-01', '2017-01-01']
+
+
+n_jobs: False
+parallel: True

@@ -1,0 +1,383 @@
+features_time_step: ['1-start_event', '2-start_event', '3-start_event', '4-start_event',
+                     '5-start_event', '6-start_event', '8-start_event', '9-start_event',
+                     '10-start_event', '11-start_event', '12-start_event',
+                     '13-start_event', '14-start_event', '15-start_event',
+                     '16-start_event', '23-start_event', '24-start_event',
+                     '29-start_event', '30-start_event', '31-start_event',
+                     '32-start_event', '34-start_event', '35-start_event',
+                     '40-start_event', '43-start_event', '45-start_event',
+                     '47-start_event', '61-start_event', '68-start_event', '2-end_event',
+                     '3-end_event', '4-end_event', '5-end_event', '6-end_event',
+                     '8-end_event', '9-end_event', '10-end_event', '11-end_event',
+                     '12-end_event', '13-end_event', '14-end_event', '15-end_event',
+                     '16-end_event', '23-end_event', '24-end_event', '30-end_event',
+                     '31-end_event', '32-end_event', '34-end_event', '35-end_event',
+                     '40-end_event', '43-end_event', '45-end_event', '47-end_event',
+                     '61-end_event', '68-end_event', '16-period_event',
+                     '15-period_event', '13-period_event', '12-period_event',
+                     '45-period_event', '24-period_event', '43-period_event',
+                     '9-period_event', '31-period_event', '10-period_event',
+                     '47-period_event', '8-period_event', '11-period_event',
+                     '30-period_event', '4-period_event', '61-period_event',
+                     '14-period_event', '68-period_event', '23-period_event',
+                     '5-period_event', '6-period_event', '34-period_event',
+                     '32-period_event', '40-period_event', '35-period_event',
+                     '3-period_event', '2-period_event', '2-concert-end',
+                     '2-exhibition-end', '2-festival-end', '2-football-end',
+                     '2-hockey-end', '2-other-end', '2-show-end', '2-soccer-end',
+                     '2-sport-end', '2-tennis-end', '3-concert-end', '3-exhibition-end',
+                     '3-festival-end', '3-football-end', '3-hockey-end', '3-other-end',
+                     '3-show-end', '3-soccer-end', '3-sport-end', '3-tennis-end',
+                     '4-concert-end', '4-exhibition-end', '4-festival-end',
+                     '4-football-end', '4-hockey-end', '4-other-end', '4-show-end',
+                     '4-soccer-end', '4-sport-end', '4-tennis-end', '5-concert-end',
+                     '5-exhibition-end', '5-festival-end', '5-football-end',
+                     '5-hockey-end', '5-other-end', '5-show-end', '5-soccer-end',
+                     '5-sport-end', '5-tennis-end', '6-concert-end', '6-exhibition-end',
+                     '6-festival-end', '6-football-end', '6-hockey-end', '6-other-end',
+                     '6-show-end', '6-soccer-end', '6-sport-end', '6-tennis-end',
+                     '8-concert-end', '8-exhibition-end', '8-festival-end',
+                     '8-football-end', '8-hockey-end', '8-other-end', '8-show-end',
+                     '8-soccer-end', '8-sport-end', '8-tennis-end', '9-concert-end',
+                     '9-exhibition-end', '9-festival-end', '9-football-end',
+                     '9-hockey-end', '9-other-end', '9-show-end', '9-soccer-end',
+                     '9-sport-end', '9-tennis-end', '10-concert-end',
+                     '10-exhibition-end', '10-festival-end', '10-football-end',
+                     '10-hockey-end', '10-other-end', '10-show-end', '10-soccer-end',
+                     '10-sport-end', '10-tennis-end', '11-concert-end',
+                     '11-exhibition-end', '11-festival-end', '11-football-end',
+                     '11-hockey-end', '11-other-end', '11-show-end', '11-soccer-end',
+                     '11-sport-end', '11-tennis-end', '12-concert-end',
+                     '12-exhibition-end', '12-festival-end', '12-football-end',
+                     '12-hockey-end', '12-other-end', '12-show-end', '12-soccer-end',
+                     '12-sport-end', '12-tennis-end', '13-concert-end',
+                     '13-exhibition-end', '13-festival-end', '13-football-end',
+                     '13-hockey-end', '13-other-end', '13-show-end', '13-soccer-end',
+                     '13-sport-end', '13-tennis-end', '14-concert-end',
+                     '14-exhibition-end', '14-festival-end', '14-football-end',
+                     '14-hockey-end', '14-other-end', '14-show-end', '14-soccer-end',
+                     '14-sport-end', '14-tennis-end', '15-concert-end',
+                     '15-exhibition-end', '15-festival-end', '15-football-end',
+                     '15-hockey-end', '15-other-end', '15-show-end', '15-soccer-end',
+                     '15-sport-end', '15-tennis-end', '16-concert-end',
+                     '16-exhibition-end', '16-festival-end', '16-football-end',
+                     '16-hockey-end', '16-other-end', '16-show-end', '16-soccer-end',
+                     '16-sport-end', '16-tennis-end', '23-concert-end',
+                     '23-exhibition-end', '23-festival-end', '23-football-end',
+                     '23-hockey-end', '23-other-end', '23-show-end', '23-soccer-end',
+                     '23-sport-end', '23-tennis-end', '24-concert-end',
+                     '24-exhibition-end', '24-festival-end', '24-football-end',
+                     '24-hockey-end', '24-other-end', '24-show-end', '24-soccer-end',
+                     '24-sport-end', '24-tennis-end', '30-concert-end',
+                     '30-exhibition-end', '30-festival-end', '30-football-end',
+                     '30-hockey-end', '30-other-end', '30-show-end', '30-soccer-end',
+                     '30-sport-end', '30-tennis-end', '31-concert-end',
+                     '31-exhibition-end', '31-festival-end', '31-football-end',
+                     '31-hockey-end', '31-other-end', '31-show-end', '31-soccer-end',
+                     '31-sport-end', '31-tennis-end', '32-concert-end',
+                     '32-exhibition-end', '32-festival-end', '32-football-end',
+                     '32-hockey-end', '32-other-end', '32-show-end', '32-soccer-end',
+                     '32-sport-end', '32-tennis-end', '34-concert-end',
+                     '34-exhibition-end', '34-festival-end', '34-football-end',
+                     '34-hockey-end', '34-other-end', '34-show-end', '34-soccer-end',
+                     '34-sport-end', '34-tennis-end', '35-concert-end',
+                     '35-exhibition-end', '35-festival-end', '35-football-end',
+                     '35-hockey-end', '35-other-end', '35-show-end', '35-soccer-end',
+                     '35-sport-end', '35-tennis-end', '40-concert-end',
+                     '40-exhibition-end', '40-festival-end', '40-football-end',
+                     '40-hockey-end', '40-other-end', '40-show-end', '40-soccer-end',
+                     '40-sport-end', '40-tennis-end', '43-concert-end',
+                     '43-exhibition-end', '43-festival-end', '43-football-end',
+                     '43-hockey-end', '43-other-end', '43-show-end', '43-soccer-end',
+                     '43-sport-end', '43-tennis-end', '45-concert-end',
+                     '45-exhibition-end', '45-festival-end', '45-football-end',
+                     '45-hockey-end', '45-other-end', '45-show-end', '45-soccer-end',
+                     '45-sport-end', '45-tennis-end', '47-concert-end',
+                     '47-exhibition-end', '47-festival-end', '47-football-end',
+                     '47-hockey-end', '47-other-end', '47-show-end', '47-soccer-end',
+                     '47-sport-end', '47-tennis-end', '61-concert-end',
+                     '61-exhibition-end', '61-festival-end', '61-football-end',
+                     '61-hockey-end', '61-other-end', '61-show-end', '61-soccer-end',
+                     '61-sport-end', '61-tennis-end', '68-concert-end',
+                     '68-exhibition-end', '68-festival-end', '68-football-end',
+                     '68-hockey-end', '68-other-end', '68-show-end', '68-soccer-end',
+                     '68-sport-end', '68-tennis-end', '2-concert-period',
+                     '2-exhibition-period', '2-festival-period', '2-football-period',
+                     '2-hockey-period', '2-other-period', '2-show-period',
+                     '2-soccer-period', '2-sport-period', '2-tennis-period',
+                     '3-concert-period', '3-exhibition-period', '3-festival-period',
+                     '3-football-period', '3-hockey-period', '3-other-period',
+                     '3-show-period', '3-soccer-period', '3-sport-period',
+                     '3-tennis-period', '4-concert-period', '4-exhibition-period',
+                     '4-festival-period', '4-football-period', '4-hockey-period',
+                     '4-other-period', '4-show-period', '4-soccer-period',
+                     '4-sport-period', '4-tennis-period', '5-concert-period',
+                     '5-exhibition-period', '5-festival-period', '5-football-period',
+                     '5-hockey-period', '5-other-period', '5-show-period',
+                     '5-soccer-period', '5-sport-period', '5-tennis-period',
+                     '6-concert-period', '6-exhibition-period', '6-festival-period',
+                     '6-football-period', '6-hockey-period', '6-other-period',
+                     '6-show-period', '6-soccer-period', '6-sport-period',
+                     '6-tennis-period', '8-concert-period', '8-exhibition-period',
+                     '8-festival-period', '8-football-period', '8-hockey-period',
+                     '8-other-period', '8-show-period', '8-soccer-period',
+                     '8-sport-period', '8-tennis-period', '9-concert-period',
+                     '9-exhibition-period', '9-festival-period', '9-football-period',
+                     '9-hockey-period', '9-other-period', '9-show-period',
+                     '9-soccer-period', '9-sport-period', '9-tennis-period',
+                     '10-concert-period', '10-exhibition-period', '10-festival-period',
+                     '10-football-period', '10-hockey-period', '10-other-period',
+                     '10-show-period', '10-soccer-period', '10-sport-period',
+                     '10-tennis-period', '11-concert-period', '11-exhibition-period',
+                     '11-festival-period', '11-football-period', '11-hockey-period',
+                     '11-other-period', '11-show-period', '11-soccer-period',
+                     '11-sport-period', '11-tennis-period', '12-concert-period',
+                     '12-exhibition-period', '12-festival-period', '12-football-period',
+                     '12-hockey-period', '12-other-period', '12-show-period',
+                     '12-soccer-period', '12-sport-period', '12-tennis-period',
+                     '13-concert-period', '13-exhibition-period', '13-festival-period',
+                     '13-football-period', '13-hockey-period', '13-other-period',
+                     '13-show-period', '13-soccer-period', '13-sport-period',
+                     '13-tennis-period', '14-concert-period', '14-exhibition-period',
+                     '14-festival-period', '14-football-period', '14-hockey-period',
+                     '14-other-period', '14-show-period', '14-soccer-period',
+                     '14-sport-period', '14-tennis-period', '15-concert-period',
+                     '15-exhibition-period', '15-festival-period', '15-football-period',
+                     '15-hockey-period', '15-other-period', '15-show-period',
+                     '15-soccer-period', '15-sport-period', '15-tennis-period',
+                     '16-concert-period', '16-exhibition-period', '16-festival-period',
+                     '16-football-period', '16-hockey-period', '16-other-period',
+                     '16-show-period', '16-soccer-period', '16-sport-period',
+                     '16-tennis-period', '23-concert-period', '23-exhibition-period',
+                     '23-festival-period', '23-football-period', '23-hockey-period',
+                     '23-other-period', '23-show-period', '23-soccer-period',
+                     '23-sport-period', '23-tennis-period', '24-concert-period',
+                     '24-exhibition-period', '24-festival-period', '24-football-period',
+                     '24-hockey-period', '24-other-period', '24-show-period',
+                     '24-soccer-period', '24-sport-period', '24-tennis-period',
+                     '30-concert-period', '30-exhibition-period', '30-festival-period',
+                     '30-football-period', '30-hockey-period', '30-other-period',
+                     '30-show-period', '30-soccer-period', '30-sport-period',
+                     '30-tennis-period', '31-concert-period', '31-exhibition-period',
+                     '31-festival-period', '31-football-period', '31-hockey-period',
+                     '31-other-period', '31-show-period', '31-soccer-period',
+                     '31-sport-period', '31-tennis-period', '32-concert-period',
+                     '32-exhibition-period', '32-festival-period', '32-football-period',
+                     '32-hockey-period', '32-other-period', '32-show-period',
+                     '32-soccer-period', '32-sport-period', '32-tennis-period',
+                     '34-concert-period', '34-exhibition-period', '34-festival-period',
+                     '34-football-period', '34-hockey-period', '34-other-period',
+                     '34-show-period', '34-soccer-period', '34-sport-period',
+                     '34-tennis-period', '35-concert-period', '35-exhibition-period',
+                     '35-festival-period', '35-football-period', '35-hockey-period',
+                     '35-other-period', '35-show-period', '35-soccer-period',
+                     '35-sport-period', '35-tennis-period', '40-concert-period',
+                     '40-exhibition-period', '40-festival-period', '40-football-period',
+                     '40-hockey-period', '40-other-period', '40-show-period',
+                     '40-soccer-period', '40-sport-period', '40-tennis-period',
+                     '43-concert-period', '43-exhibition-period', '43-festival-period',
+                     '43-football-period', '43-hockey-period', '43-other-period',
+                     '43-show-period', '43-soccer-period', '43-sport-period',
+                     '43-tennis-period', '45-concert-period', '45-exhibition-period',
+                     '45-festival-period', '45-football-period', '45-hockey-period',
+                     '45-other-period', '45-show-period', '45-soccer-period',
+                     '45-sport-period', '45-tennis-period', '47-concert-period',
+                     '47-exhibition-period', '47-festival-period', '47-football-period',
+                     '47-hockey-period', '47-other-period', '47-show-period',
+                     '47-soccer-period', '47-sport-period', '47-tennis-period',
+                     '61-concert-period', '61-exhibition-period', '61-festival-period',
+                     '61-football-period', '61-hockey-period', '61-other-period',
+                     '61-show-period', '61-soccer-period', '61-sport-period',
+                     '61-tennis-period', '68-concert-period', '68-exhibition-period',
+                     '68-festival-period', '68-football-period', '68-hockey-period',
+                     '68-other-period', '68-show-period', '68-soccer-period',
+                     '68-sport-period', '68-tennis-period', '1-concert-start',
+                     '1-exhibition-start', '1-festival-start', '1-football-start',
+                     '1-hockey-start', '1-other-start', '1-show-start', '1-soccer-start',
+                     '1-sport-start', '1-tennis-start', '2-concert-start',
+                     '2-exhibition-start', '2-festival-start', '2-football-start',
+                     '2-hockey-start', '2-other-start', '2-show-start', '2-soccer-start',
+                     '2-sport-start', '2-tennis-start', '3-concert-start',
+                     '3-exhibition-start', '3-festival-start', '3-football-start',
+                     '3-hockey-start', '3-other-start', '3-show-start', '3-soccer-start',
+                     '3-sport-start', '3-tennis-start', '4-concert-start',
+                     '4-exhibition-start', '4-festival-start', '4-football-start',
+                     '4-hockey-start', '4-other-start', '4-show-start', '4-soccer-start',
+                     '4-sport-start', '4-tennis-start', '5-concert-start',
+                     '5-exhibition-start', '5-festival-start', '5-football-start',
+                     '5-hockey-start', '5-other-start', '5-show-start', '5-soccer-start',
+                     '5-sport-start', '5-tennis-start', '6-concert-start',
+                     '6-exhibition-start', '6-festival-start', '6-football-start',
+                     '6-hockey-start', '6-other-start', '6-show-start', '6-soccer-start',
+                     '6-sport-start', '6-tennis-start', '8-concert-start',
+                     '8-exhibition-start', '8-festival-start', '8-football-start',
+                     '8-hockey-start', '8-other-start', '8-show-start', '8-soccer-start',
+                     '8-sport-start', '8-tennis-start', '9-concert-start',
+                     '9-exhibition-start', '9-festival-start', '9-football-start',
+                     '9-hockey-start', '9-other-start', '9-show-start', '9-soccer-start',
+                     '9-sport-start', '9-tennis-start', '10-concert-start',
+                     '10-exhibition-start', '10-festival-start', '10-football-start',
+                     '10-hockey-start', '10-other-start', '10-show-start',
+                     '10-soccer-start', '10-sport-start', '10-tennis-start',
+                     '11-concert-start', '11-exhibition-start', '11-festival-start',
+                     '11-football-start', '11-hockey-start', '11-other-start',
+                     '11-show-start', '11-soccer-start', '11-sport-start',
+                     '11-tennis-start', '12-concert-start', '12-exhibition-start',
+                     '12-festival-start', '12-football-start', '12-hockey-start',
+                     '12-other-start', '12-show-start', '12-soccer-start',
+                     '12-sport-start', '12-tennis-start', '13-concert-start',
+                     '13-exhibition-start', '13-festival-start', '13-football-start',
+                     '13-hockey-start', '13-other-start', '13-show-start',
+                     '13-soccer-start', '13-sport-start', '13-tennis-start',
+                     '14-concert-start', '14-exhibition-start', '14-festival-start',
+                     '14-football-start', '14-hockey-start', '14-other-start',
+                     '14-show-start', '14-soccer-start', '14-sport-start',
+                     '14-tennis-start', '15-concert-start', '15-exhibition-start',
+                     '15-festival-start', '15-football-start', '15-hockey-start',
+                     '15-other-start', '15-show-start', '15-soccer-start',
+                     '15-sport-start', '15-tennis-start', '16-concert-start',
+                     '16-exhibition-start', '16-festival-start', '16-football-start',
+                     '16-hockey-start', '16-other-start', '16-show-start',
+                     '16-soccer-start', '16-sport-start', '16-tennis-start',
+                     '23-concert-start', '23-exhibition-start', '23-festival-start',
+                     '23-football-start', '23-hockey-start', '23-other-start',
+                     '23-show-start', '23-soccer-start', '23-sport-start',
+                     '23-tennis-start', '24-concert-start', '24-exhibition-start',
+                     '24-festival-start', '24-football-start', '24-hockey-start',
+                     '24-other-start', '24-show-start', '24-soccer-start',
+                     '24-sport-start', '24-tennis-start', '29-concert-start',
+                     '29-exhibition-start', '29-festival-start', '29-football-start',
+                     '29-hockey-start', '29-other-start', '29-show-start',
+                     '29-soccer-start', '29-sport-start', '29-tennis-start',
+                     '30-concert-start', '30-exhibition-start', '30-festival-start',
+                     '30-football-start', '30-hockey-start', '30-other-start',
+                     '30-show-start', '30-soccer-start', '30-sport-start',
+                     '30-tennis-start', '31-concert-start', '31-exhibition-start',
+                     '31-festival-start', '31-football-start', '31-hockey-start',
+                     '31-other-start', '31-show-start', '31-soccer-start',
+                     '31-sport-start', '31-tennis-start', '32-concert-start',
+                     '32-exhibition-start', '32-festival-start', '32-football-start',
+                     '32-hockey-start', '32-other-start', '32-show-start',
+                     '32-soccer-start', '32-sport-start', '32-tennis-start',
+                     '34-concert-start', '34-exhibition-start', '34-festival-start',
+                     '34-football-start', '34-hockey-start', '34-other-start',
+                     '34-show-start', '34-soccer-start', '34-sport-start',
+                     '34-tennis-start', '35-concert-start', '35-exhibition-start',
+                     '35-festival-start', '35-football-start', '35-hockey-start',
+                     '35-other-start', '35-show-start', '35-soccer-start',
+                     '35-sport-start', '35-tennis-start', '40-concert-start',
+                     '40-exhibition-start', '40-festival-start', '40-football-start',
+                     '40-hockey-start', '40-other-start', '40-show-start',
+                     '40-soccer-start', '40-sport-start', '40-tennis-start',
+                     '43-concert-start', '43-exhibition-start', '43-festival-start',
+                     '43-football-start', '43-hockey-start', '43-other-start',
+                     '43-show-start', '43-soccer-start', '43-sport-start',
+                     '43-tennis-start', '45-concert-start', '45-exhibition-start',
+                     '45-festival-start', '45-football-start', '45-hockey-start',
+                     '45-other-start', '45-show-start', '45-soccer-start',
+                     '45-sport-start', '45-tennis-start', '47-concert-start',
+                     '47-exhibition-start', '47-festival-start', '47-football-start',
+                     '47-hockey-start', '47-other-start', '47-show-start',
+                     '47-soccer-start', '47-sport-start', '47-tennis-start',
+                     '61-concert-start', '61-exhibition-start', '61-festival-start',
+                     '61-football-start', '61-hockey-start', '61-other-start',
+                     '61-show-start', '61-soccer-start', '61-sport-start',
+                     '61-tennis-start', '68-concert-start', '68-exhibition-start',
+                     '68-festival-start', '68-football-start', '68-hockey-start',
+                     '68-other-start', '68-show-start', '68-soccer-start',
+                     '68-sport-start', '68-tennis-start']
+
+features_day: ['Day_en', 'Mois','vac_noel_quebec', 'day_off_quebec', '24DEC', '31DEC',
+                    'renov_beaubien', 'vac_udem1', 'vac_udem2',]
+
+features_todummy: ['Day_en', 'Mois']
+
+time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13',
+       '14', '1', '9', '5', '18', '36', '24', '68', '43', '8', '64', '10',
+       '55', '3', '49', '51', '2', '19', '56', '7', '6', '4', '48', '66',
+       '25', '23', '28', '39', '54', '60', '27', '20', '46', '12', '21',
+       '62', '52', '41', '50', '30', '16', '37', '40', '26', '67', '57',
+       '61', '42', '45', '38', '29', '58', '63', '22', '59', '53', '17']
+
+
+start_datetime: '2015-01-01 00:00:00'
+end_datetime: '2017-12-31 23:45:00'
+
+# Variables optimization
+scaler_choice_X:
+scaler_choice_y:
+
+start_datetime_optimization: '2015-01-01 00:00:00'
+end_datetime_optimization: '2016-12-31 23:45:00'
+
+param_kfold:
+    n_splits: 5
+    shuffle: True
+    random_state: 1
+
+param_grid:
+    n_estimators: [100, 150, 200]
+    criterion: ['mse']
+    max_depth: [null]
+    min_samples_split: [2, 5, 10]
+    min_samples_leaf: [1, 5, 10]
+    min_weight_fraction_leaf: [0.0]
+    max_features: ['auto', null]
+    max_leaf_nodes: [null]
+    min_impurity_decrease: [0.0]
+    min_impurity_split: [null]
+    bootstrap: [True]
+    oob_score: [False]
+    n_jobs: [6]
+    random_state: [null]
+    verbose: [0]
+    warm_start: [False]
+
+
+#param_kfold:
+#    n_splits: 2
+#    shuffle: True
+#    random_state: 1
+#
+#param_grid:
+#    n_estimators: [10, 20]
+#    criterion: ['mse']
+#    max_depth: [null]
+#    min_samples_split: [10]
+#    min_samples_leaf: [10]
+#    min_weight_fraction_leaf: [0.0]
+#    max_features: [null]
+#    max_leaf_nodes: [null]
+#    min_impurity_decrease: [0.0]
+#    min_impurity_split: [null]
+#    bootstrap: [True]
+#    oob_score: [False]
+#    n_jobs: [6]
+#    random_state: [null]
+#    verbose: [0]
+#    warm_start: [False]
+
+# Variables global
+index: 'Datetime'
+start_time: '00:00:00'
+end_time: '23:45:00'
+time_step_second: 900
+
+# Variables model
+model_name: 'long-term0-rf4'
+estimator_choice: 'rf'
+
+# Variables path
+path_save: '/home/toque/data2/forecast/model/long-term/scikit-regressor/'
+
+# Data files
+observation_data_path: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016_2017_sumpass_nodayfree.csv']
+features_data_path: ['/home/toque/data2/montreal/events/data/clean/events_2015_2018_end_event_stopid.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_start_event_stopid.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_period_event_stopid.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_end_event_stopid_category.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_start_event_stopid_category.csv',
+                     '/home/toque/data2/montreal/events/data/clean/events_2015_2018_period_event_stopid_category.csv',
+                     '/home/toque/data2/weather/predicted_weather/predicted_weather_2015_2017_included_perday_pm.csv',
+                     '/home/toque/data2/date/2013-01-01-2019-01-01_new.csv',
+                     '/home/toque/data2/montreal/stm/data/trend/trend_r_stl_2015-01-01_2018-01-01_freq30.csv']

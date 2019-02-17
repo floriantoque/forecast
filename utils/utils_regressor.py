@@ -30,14 +30,15 @@ def get_estimator(estimator_choice = 'rf', params=None):
     return estimator
 
 
-def optimize_multioutput_regressor_multiseries_model(X, y_list, param_grid, param_kfold, estimator, verbose=0):
+def optimize_multioutput_regressor_multiseries_model(X, y_list, param_grid, param_kfold, estimator, verbose=0,
+                                                     n_jobs=-1):
     cv = KFold(**param_kfold)
     
     grid_search_time_series = {}
 
     for ydx, y in enumerate(tqdm(y_list, desc="Optimization: loop over time-series")):
         try:
-            grid_search_res = GridSearchCV(estimator, param_grid, cv=cv, verbose=verbose)
+            grid_search_res = GridSearchCV(estimator, param_grid, cv=cv, verbose=verbose, n_jobs=n_jobs)
             grid_search_res = grid_search_res.fit(X, y,)
         except ValueError:
             print("ValueError: param_grid may do no fit with the estimator.")

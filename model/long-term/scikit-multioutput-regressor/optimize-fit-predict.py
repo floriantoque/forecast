@@ -1,8 +1,9 @@
 import sys
-sys.path.insert(0, '../../../utils/')
-import utils_regressor
-import utils_date
-import utils
+
+sys.path.insert(0, '../../../')
+import utils.utils_regressor as utils_regressor
+import utils.utils_date as utils_date
+import utils.utils as utils
 from tqdm import tqdm
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
@@ -13,15 +14,23 @@ import argparse
 # Read config file and load config variables
 parser = argparse.ArgumentParser(description='Parameters of script fit')
 parser.add_argument('--config', type=str, help='Yaml file containing the configuration of the model')
+parser.add_argument('--config_path', type=str, help='Yaml file containing the configuration path', default='../../config/config-path/default-config-path.yaml')
 parser.add_argument('--force', type=bool,
                     help='Boolean: If True force all the saving even if file already exist, if False ask to the user',
                     default=False)
 args = parser.parse_args()
 config_file = args.config
+config_path_file = args.config_path
 
 with open(config_file, 'r') as stream:
     try:
         config = yaml.load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
+
+with open(config_path_file, 'r') as stream:
+    try:
+        config_path = yaml.load(stream)
     except yaml.YAMLError as exc:
         print(exc)
 
@@ -45,9 +54,9 @@ end_time = config['end_time']
 time_step_second = config['time_step_second']
 model_name = config['model_name']
 estimator_choice = config['estimator_choice']
-path_save = config['path_save']
-observation_data_path = config['observation_data_path']
-features_data_path = config['features_data_path']
+path_save = config_path['path_save']
+observation_data_path = config_path['observation_data_path']
+features_data_path = config_path['features_data_path']
 
 
 

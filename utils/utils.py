@@ -345,7 +345,7 @@ def pred_day_array_to_df(pred, time_series, days, time_step_second=15*60, index=
     
     data = np.concatenate([datetime_array.reshape(1, datetime_array.shape[0]), pred]).T
     
-    df = pd.DataFrame(data = data, columns = [index]+time_series)
+    df = pd.DataFrame(data = data, columns = [index]+time_series).set_index(index).astype(float).round(3).reset_index()
     
     return df
 

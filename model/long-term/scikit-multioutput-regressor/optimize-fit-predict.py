@@ -18,6 +18,10 @@ parser.add_argument('--config_path', type=str, help='Yaml file containing the co
 parser.add_argument('--force', type=bool,
                     help='Boolean: If True force all the saving even if file already exist, if False ask to the user',
                     default=False)
+parser.add_argument('--n_jobs', type=int,
+		    help='Int: Number of cores used during the optimization',
+                    default=-1)
+
 args = parser.parse_args()
 config_file = args.config
 config_path_file = args.config_path
@@ -35,6 +39,7 @@ with open(config_path_file, 'r') as stream:
         print(exc)
 
 force_save = args.force
+n_jobs = args.n_jobs
 
 features_time_step = config['features_time_step']
 features_day = config['features_day']
@@ -57,6 +62,7 @@ estimator_choice = config['estimator_choice']
 path_save = config_path['path_save']
 observation_data_path = config_path['observation_data_path']
 features_data_path = config_path['features_data_path']
+
 
 
 
@@ -90,6 +96,8 @@ model_infos['scaler_choice_X'] = scaler_choice_X
 model_infos['scaler_choice_y'] = scaler_choice_y
 model_infos['start_datetime_optimization'] = start_datetime_optimization
 model_infos['end_datetime_optimization'] = end_datetime_optimization
+model_infos['n_jobs'] = n_jobs
+
 
 df_obs = utils.read_csv_list(observation_data_path).set_index(index).loc[start_datetime:end_datetime].reset_index()
 df_fea = utils.read_csv_list(features_data_path).set_index(index).loc[start_datetime:end_datetime].reset_index()
@@ -134,7 +142,7 @@ estimator = utils_regressor.get_estimator(estimator_choice)
 grid_search_time_series = {}
 grid_search_time_series = utils_regressor.optimize_multioutput_regressor_multiseries_model(X_train, y_list_train[:n],
                                                                                            param_grid, param_kfold,
-                                                                                           estimator, verbose=0)
+                                                                                           estimator, verbose=0, n_jobs=n_jobs)
 
 utils.save_pickle_safe(path_optimization + 'grid_search_time_series.pkl', grid_search_time_series,
                        force_save=force_save)

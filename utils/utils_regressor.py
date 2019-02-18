@@ -1,5 +1,6 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import ElasticNet
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
@@ -10,7 +11,7 @@ from tqdm import tqdm
 import numpy as np
 
 def get_estimator(estimator_choice = 'rf', params=None):
-    if estimator_choice not in ['rf', 'lr', 'gp']:
+    if estimator_choice not in ['rf', 'lr', 'gp', 'en']:
         print('Error: estimator_choice value not good')
     if estimator_choice == 'rf':
         if params==None:
@@ -27,6 +28,12 @@ def get_estimator(estimator_choice = 'rf', params=None):
             estimator = GaussianProcessRegressor()
         else:
             estimator = GaussianProcessRegressor(**params)
+    if estimator_choice == 'en':
+        if params==None:
+            estimator = ElasticNet()
+        else:
+            estimator = ElasticNet(**params)
+
     return estimator
 
 

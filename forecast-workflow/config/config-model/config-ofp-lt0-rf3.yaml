@@ -1,0 +1,105 @@
+features_time_step: ['1-start_event', '2-start_event', '3-start_event', '4-start_event',
+                      '5-start_event', '6-start_event', '8-start_event', '9-start_event',
+                      '10-start_event', '11-start_event', '12-start_event',
+                      '13-start_event', '14-start_event', '15-start_event',
+                      '16-start_event', '23-start_event', '24-start_event',
+                      '29-start_event', '30-start_event', '31-start_event',
+                      '32-start_event', '34-start_event', '35-start_event',
+                      '40-start_event', '43-start_event', '45-start_event',
+                      '47-start_event', '61-start_event', '68-start_event', '2-end_event',
+                      '3-end_event', '4-end_event', '5-end_event', '6-end_event',
+                      '8-end_event', '9-end_event', '10-end_event', '11-end_event',
+                      '12-end_event', '13-end_event', '14-end_event', '15-end_event',
+                      '16-end_event', '23-end_event', '24-end_event', '30-end_event',
+                      '31-end_event', '32-end_event', '34-end_event', '35-end_event',
+                      '40-end_event', '43-end_event', '45-end_event', '47-end_event',
+                      '61-end_event', '68-end_event', '16-period_event',
+                      '15-period_event', '13-period_event', '12-period_event',
+                      '45-period_event', '24-period_event', '43-period_event',
+                      '9-period_event', '31-period_event', '10-period_event',
+                      '47-period_event', '8-period_event', '11-period_event',
+                      '30-period_event', '4-period_event', '61-period_event',
+                      '14-period_event', '68-period_event', '23-period_event',
+                      '5-period_event', '6-period_event', '34-period_event',
+                      '32-period_event', '40-period_event', '35-period_event',
+                      '3-period_event', '2-period_event']
+
+features_day: ['Day_en', 'Mois','vac_noel_quebec', 'day_off_quebec', '24DEC', '31DEC',
+                    'renov_beaubien', 'vac_udem1', 'vac_udem2',]
+
+features_todummy: ['Day_en', 'Mois']
+
+time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13',
+       '14', '1', '9', '5', '18', '36', '24', '68', '43', '8', '64', '10',
+       '55', '3', '49', '51', '2', '19', '56', '7', '6', '4', '48', '66',
+       '25', '23', '28', '39', '54', '60', '27', '20', '46', '12', '21',
+       '62', '52', '41', '50', '30', '16', '37', '40', '26', '67', '57',
+       '61', '42', '45', '38', '29', '58', '63', '22', '59', '53', '17']
+
+
+start_datetime: '2015-01-01 00:00:00'
+end_datetime: '2017-12-31 23:45:00'
+
+# Variables optimization
+scaler_choice_X:
+scaler_choice_y:
+
+start_datetime_optimization: '2015-01-01 00:00:00'
+end_datetime_optimization: '2016-12-31 23:45:00'
+
+param_kfold:
+    n_splits: 5
+    shuffle: True
+    random_state: 1
+
+param_grid:
+    n_estimators: [100, 150, 200]
+    criterion: ['mse']
+    max_depth: [null]
+    min_samples_split: [2, 5, 10]
+    min_samples_leaf: [1, 5, 10]
+    min_weight_fraction_leaf: [0.0]
+    max_features: ['auto', null]
+    max_leaf_nodes: [null]
+    min_impurity_decrease: [0.0]
+    min_impurity_split: [null]
+    bootstrap: [True]
+    oob_score: [False]
+    n_jobs: [1]
+    random_state: [null]
+    verbose: [0]
+    warm_start: [False]
+
+
+#param_kfold:
+#    n_splits: 2
+#    shuffle: True
+#    random_state: 1
+#
+#param_grid:
+#    n_estimators: [10, 20]
+#    criterion: ['mse']
+#    max_depth: [null]
+#    min_samples_split: [10]
+#    min_samples_leaf: [10]
+#    min_weight_fraction_leaf: [0.0]
+#    max_features: [null]
+#    max_leaf_nodes: [null]
+#    min_impurity_decrease: [0.0]
+#    min_impurity_split: [null]
+#    bootstrap: [True]
+#    oob_score: [False]
+#    n_jobs: [6]
+#    random_state: [null]
+#    verbose: [0]
+#    warm_start: [False]
+
+# Variables global
+index: 'Datetime'
+start_time: '00:00:00'
+end_time: '23:45:00'
+time_step_second: 900
+
+# Variables model
+model_name: 'long-term0-rf3'
+estimator_choice: 'rf'

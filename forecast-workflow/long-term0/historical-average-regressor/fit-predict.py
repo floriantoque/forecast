@@ -1,6 +1,8 @@
 import sys
 
-sys.path.insert(0, '../../../')
+sys.path.insert(0,  '../../../')
+
+import model.historical_average.ha_model as ha_model
 import utils.utils_regressor as utils_regressor
 import utils.utils_date as utils_date
 import utils.utils as utils
@@ -10,6 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 import yaml
 import argparse
+import numpy as np
 
 # Read config file and load config variables
 parser = argparse.ArgumentParser(description='Parameters of script fit')
@@ -18,12 +21,9 @@ parser.add_argument('--config_path', type=str, help='Yaml file containing the co
 parser.add_argument('--force', type=bool,
                     help='Boolean: If True force all the saving even if file already exist, if False ask to the user',
                     default=False)
-parser.add_argument('--n_jobs_cv', type=int,
-		    help='Int: Number of cores used for the cross-validation',
-                    default=1)
 parser.add_argument('--n_jobs', type=int,
-		    help='Int: Number of cores used per regressor',
-                    default=1)
+		    help='Int: Number of cores used during the optimization',
+                    default=-1)
 
 args = parser.parse_args()
 config_file = args.config
@@ -42,8 +42,7 @@ with open(config_path_file, 'r') as stream:
         print(exc)
 
 force_save = args.force
-n_jobs = args.n_jobs
-n_jobs_cv = args.n_jobs_cv
+#n_jobs = args.n_jobs
 
 features_time_step = config['features_time_step']
 features_day = config['features_day']
@@ -55,8 +54,10 @@ scaler_choice_X = config['scaler_choice_X']
 scaler_choice_y = config['scaler_choice_y']
 start_datetime_optimization = config['start_datetime_optimization']
 end_datetime_optimization = config['end_datetime_optimization']
-param_kfold = config['param_kfold']
-param_grid = config['param_grid']
+#param_kfold = config['param_kfold']
+#param_grid = config['param_grid']
+best_params_ = config['best_params_']
+best_params_time_series = config['best_params_time_series']
 index = config['index']
 start_time = config['start_time']
 end_time = config['end_time']
@@ -88,9 +89,10 @@ model_infos['path_fit'] = path_fit
 model_infos['path_prediction'] = path_prediction
 model_infos['observation_data_path'] = observation_data_path
 model_infos['features_data_path'] = features_data_path
-model_infos['param_grid'] = param_grid
-model_infos['param_kfold'] = param_kfold
-model_infos['features_time_step'] = features_time_step
+#model_infos['param_grid'] = param_grid
+#model_infos['param_kfold'] = param_kfold
+model_infos['best_params_'] = best_params_
+model_infos['best_params_time_series'] = best_params_time_series
 model_infos['features_day'] = features_day
 model_infos['features_todummy'] = features_todummy
 model_infos['time_series'] = time_series
@@ -100,8 +102,7 @@ model_infos['scaler_choice_X'] = scaler_choice_X
 model_infos['scaler_choice_y'] = scaler_choice_y
 model_infos['start_datetime_optimization'] = start_datetime_optimization
 model_infos['end_datetime_optimization'] = end_datetime_optimization
-model_infos['n_jobs'] = n_jobs
-model_infos['n_jobs_cv'] = n_jobs_cv
+#model_infos['n_jobs'] = n_jobs
 
 
 df_obs = utils.read_csv_list(observation_data_path).set_index(index).loc[start_datetime:end_datetime].reset_index()
@@ -141,40 +142,15 @@ X_train, y_list_train, days_train = X[:index_train], y_list[:,:index_train], day
 n = 68
 
 
-# Optimize
-estimator = utils_regressor.get_estimator(estimator_choice, n_jobs=n_jobs)
-
-grid_search_time_series = {}
-grid_search_time_series = utils_regressor.optimize_multioutput_regressor_multiseries_model(X_train, y_list_train[:n],
-                                                                                           param_grid, param_kfold,
-                                                                                           estimator,
-                                                                                           verbose=0,
-                                                                                           n_jobs_cv=n_jobs_cv)
-
-utils.save_pickle_safe(path_optimization + 'grid_search_time_series.pkl', grid_search_time_series,
-                       force_save=force_save)
-utils.save_pickle_safe(path_optimization + 'model_infos.pkl', model_infos, force_save=force_save)
-
-
-
-
 # Fit
+
 # Create manually the best_params
-#dict[int]['best_params_']
-#best_params = {'alpha': 0.2,'copy_X_train': True, 'kernel': None, 'n_restarts_optimizer': 0, 'normalize_y': True,
-#               'optimizer': 'fmin_l_bfgs_b','random_state': None}
-#best_params_time_series = {i : {'best_params':best_params} for i in np.arange(len(time_series))}
-
-grid_search_time_series = utils.load_pickle(path_optimization+'grid_search_time_series.pkl')
-best_params_time_series = grid_search_time_series
-
-estimator_time_series = utils_regressor.fit_multioutput_regressor_multiseries_model(X_train, y_list_train[:n],
+if (best_params_ != None):
+    best_params_time_series = {i: {'best_params_':best_params_} for i in np.arange(len(time_series[:n]))}
+estimator_time_series = utils_regressor.fit_multioutput_regressor_multiseries_model(X_train,
+                                                                                    y_list_train[:n],
                                                                                     estimator_choice,
-                                                                                    best_params_time_series,
-                                                                                    n_jobs=max(n_jobs,n_jobs_cv))
-
-
-
+                                                                                    best_params_time_series)
 # Predict
 pred = utils_regressor.predict_multioutput_regressor_multiseries_model(X, estimator_time_series)
 df = utils.pred_day_array_to_df(pred, time_series[:n], days,

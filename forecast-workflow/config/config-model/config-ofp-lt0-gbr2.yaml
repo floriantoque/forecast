@@ -1,0 +1,95 @@
+features_time_step: []
+
+features_day: ['Day_en', 'Mois','vac_noel_quebec', 'day_off_quebec', '24DEC', '31DEC',
+               'renov_beaubien', 'vac_udem1', 'vac_udem2']
+
+features_todummy: ['Day_en', 'Mois']
+
+time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13',
+       '14', '1', '9', '5', '18', '36', '24', '68', '43', '8', '64', '10',
+       '55', '3', '49', '51', '2', '19', '56', '7', '6', '4', '48', '66',
+       '25', '23', '28', '39', '54', '60', '27', '20', '46', '12', '21',
+       '62', '52', '41', '50', '30', '16', '37', '40', '26', '67', '57',
+       '61', '42', '45', '38', '29', '58', '63', '22', '59', '53', '17']
+
+
+start_datetime: '2015-01-01 00:00:00'
+end_datetime: '2017-12-31 23:45:00'
+
+# Variables optimization
+scaler_choice_X:
+scaler_choice_y:
+
+start_datetime_optimization: '2015-01-01 00:00:00'
+end_datetime_optimization: '2016-12-31 23:45:00'
+
+param_kfold:
+    n_splits: 5
+    shuffle: True
+    random_state: 1
+
+param_grid:
+    estimator__loss: ['ls']
+    estimator__learning_rate: [0.1]
+    estimator__n_estimators: [100, 150, 200]
+    estimator__subsample: [1.0]
+    estimator__criterion: ['friedman_mse']
+    estimator__min_samples_split: [2, 5, 10]
+    estimator__min_samples_leaf: [1, 5, 10]
+    estimator__min_weight_fraction_leaf: [0.0]
+    estimator__max_depth: [3]
+    estimator__min_impurity_decrease: [0.0]
+    estimator__min_impurity_split: [null]
+    estimator__init: [null]
+    estimator__random_state: [null]
+    estimator__max_features: [null, 'auto']
+#    estimator__alpha: [0.9]
+#    estimator__verbose: [0]
+#    estimator__max_leaf_nodes: [null]
+#    estimator__warm_start: [False]
+#    estimator__presort: ['auto']
+#    estimator__validation_fraction: [0.1]
+#    estimator__n_iter_no_change: [null]
+#    estimator__tol: [0.0001]
+
+
+#param_kfold:
+#    n_splits: 2
+#    shuffle: True
+#    random_state: 1
+#
+#param_grid:
+#    estimator__loss: ['ls']
+#    estimator__learning_rate: [0.1]
+#    estimator__n_estimators: [100]
+#    estimator__subsample: [1.0]
+#    estimator__criterion: ['friedman_mse']
+#    estimator__min_samples_split: [2]
+#    estimator__min_samples_leaf: [1]
+#    estimator__min_weight_fraction_leaf: [0.0]
+#    estimator__max_depth: [3]
+#    estimator__min_impurity_decrease: [0.0]
+#    estimator__min_impurity_split: [null]
+#    estimator__init: [null]
+#    estimator__random_state: [null]
+#    estimator__max_features: [null]
+#    estimator__alpha: [0.9]
+#    estimator__verbose: [0]
+#    estimator__max_leaf_nodes: [null]
+#    estimator__warm_start: [False]
+#    estimator__presort: ['auto']
+#    estimator__validation_fraction: [0.1]
+#    estimator__n_iter_no_change: [null]
+#    estimator__tol: [0.0001]
+
+# Variables global
+index: 'Datetime'
+start_time: '00:00:00'
+end_time: '23:45:00'
+time_step_second: 900
+
+# Variables model
+model_name: 'long-term0-gbr2'
+estimator_choice: 'gbr'
+
+

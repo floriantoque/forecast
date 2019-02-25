@@ -11,92 +11,52 @@
 import sys
 
 sys.path.insert(0, '../')
-from forecast_model import Forecast_model
 
+import utils.utils as utils
+import utils.utils_date as utils_date
 import pandas as pd
 import numpy as np
 import copy
 from tqdm import tqdm
 from scipy import spatial
 
-try:
-    import cPickle as pickle
-except:
-    import pickle
-
-sys.path.insert(0, '../../')
-from utils.utils import *
-from utils.utils_date import *
 
 
-class Ha_inverted_model(Forecast_model):
+class Ha_model:
 
-    def __init__(self, name: str):
-        Forecast_model.__init__(self, name)
-        self.infos['start_date'] = ''
-        self.infos['end_date'] = ''
-        self.infos['features'] = []
-        self.infos['features_day'] = []
-        self.infos['time_series'] = []
-        self.infos['observation_path'] = ''
-        self.infos['context_path'] = ''
-
-    def __str__(self):
-        return "Description of model: %s\n" \
-               "Start date learing: %s\n" \
-               "End date learing: %s\n" \
-               "Features: %s\n" \
-               "Features day: %s\n" \
-               "Learned time series: %s\n" \
-               "Training observation path: %s\n" \
-               "Training context data path: %s" % (self.infos['name'],
-                                                   self.infos['start_date'],
-                                                   self.infos['end_date'],
-                                                   self.infos['features'],
-                                                   self.infos['features_day'],
-                                                   self.infos['time_series'],
-                                                   self.infos['observation_path'],
-                                                   self.infos['context_path'])
-
-    def fit(self, X, ylist):
-
-        dict_pred_mean = {}
-        dict_pred_median = {}
-        for ix, ts in enumerate(tqdm(self.infos['time_series'])):
-            data = np.concatenate([X, ylist[ix]], axis=1)
-            dfXy = pd.DataFrame(data=data, columns=np.arange(data.shape[1]).astype(str))
-            df_mean = dfXy.groupby(dfXy.columns.values[:X.shape[1]].tolist()).mean()
-            df_median = dfXy.groupby(dfXy.columns.values[:X.shape[1]].tolist()).median()
-
-            for f in df_mean.index.values:
-                try:
-                    dict_pred_mean[tuple(f)][ts] = df_mean.loc[f].values.astype(float)
-                    dict_pred_median[tuple(f)][ts] = df_median.loc[f].values.astype(float)
-                except:
-                    dict_pred_mean[tuple(f)] = {}
-                    dict_pred_mean[tuple(f)][ts] = df_mean.loc[f].values.astype(float)
-                    dict_pred_median[tuple(f)] = {}
-                    dict_pred_median[tuple(f)][ts] = df_median.loc[f].values.astype(float)
-        self.infos['dict_pred_mean'] = dict_pred_mean
-        self.infos['dict_pred_median'] = dict_pred_median
-        return
-
-    def predict(self, X, choice='mean'):
-        if choice == 'mean':
-            dict_pred = self.infos['dict_pred_mean']
+    def __init__(self, method='mean'):
+        if method not in ['mean', 'median']:
+            raise ValueError('{method} wrong, use "mean" or "median"'.format(method=repr(method)))
         else:
-            dict_pred = self.infos['dict_pred_median']
+            self.dict_fea_pred = {}
+            self.method = method
+ 
 
-        possibles_day = [i for i in list(set(dict_pred.keys()))]
+    def fit(self, X, y):
+        data = np.concatenate([X, y], axis=1)
+        
+        dfXy = pd.DataFrame(data=data, columns=np.arange(data.shape[1]).astype(str))
+        
+        if self.method == 'mean':
+            df = dfXy.groupby(dfXy.columns.values[:X.shape[1]].tolist()).mean()
+            for f in df.index.values:
+                self.dict_fea_pred[tuple(f)] = df.loc[f].values.astype(float)
+
+        if self.method == 'median':
+            df = dfXy.groupby(dfXy.columns.values[:X.shape[1]].tolist()).median()
+            for f in df.index.values:
+                self.dict_fea_pred[tuple(f)] = df.loc[f].values.astype(float)
+            
+        return self
+
+    def predict(self, X):
+
+        features = [i for i in list(set(self.dict_fea_pred.keys()))]
         pred_all = []
         for x in tqdm(X):
-            pred = []
             try:
-                for ts in self.infos['time_series']:
-                    pred.append(dict_pred[tuple(x)][ts])
+                pred_all.append(self.dict_fea_pred[tuple(x)])
             except:
-                npd = nearest_tuple(possibles_day, tuple(x))
-                for ts in self.infos['time_series']:
-                    pred.append(dict_pred[npd][ts])
-            pred_all.append(pred)
+                nearest_features = utils.nearest_tuple(features, tuple(x))
+                pred_all.append(self.dict_fea_pred[nearest_features])
         return np.array(pred_all)

@@ -1,0 +1,50 @@
+features_time_step: ['1-start_event']
+features_day: ['Day_en', 'Mois']
+
+features_todummy: ['Day_en', 'Mois']
+
+time_series: ['11', '32', '34']
+
+start_datetime: '2015-01-01 00:00:00'
+end_datetime: '2015-02-07 23:45:00'
+
+# Variables optimization
+scaler_choice_X: 'minmax'
+scaler_choice_y: 'standard'
+
+start_datetime_optimization: '2015-01-01 00:00:00'
+end_datetime_optimization: '2015-01-31 23:45:00'
+
+param_kfold:
+    n_splits: 2
+    shuffle: True
+    random_state: 1
+
+param_grid:
+    n_estimators: [10]
+    criterion: ['mse']
+    max_depth: [null]
+    min_samples_split: [2]
+    min_samples_leaf: [1]
+    min_weight_fraction_leaf: [0.0]
+    max_features: ['auto']
+    max_leaf_nodes: [null]
+    min_impurity_decrease: [0.0]
+    min_impurity_split: [null]
+    bootstrap: [True]
+    oob_score: [False]
+    n_jobs: [1]
+    random_state: [null]
+    verbose: [0]
+    warm_start: [False]
+
+
+# Variables global
+index: 'Datetime'
+start_time: '00:00:00'
+end_time: '23:45:00'
+time_step_second: 900
+
+# Variables model
+model_name: 'test-ofp-lt0-default'
+estimator_choice: 'rf'

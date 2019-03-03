@@ -6,10 +6,9 @@ import utils.utils_date as utils_date
 import utils.utils as utils
 from tqdm import tqdm
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
 import yaml
 import argparse
+import numpy as np
 
 # Read config file and load config variables
 parser = argparse.ArgumentParser(description='Parameters of script fit')
@@ -134,8 +133,6 @@ index_train = len(df_train_datetime.set_index(index).loc[start_datetime_optimiza
 X_train, y_list_train, days_train = X[:index_train], y_list[:,:index_train], days[:index_train]
 #X_test, y_list_test, days_test = X[index_train:], y_list[:,index_train:], days[index_train:]
 
-
-
 # Scaler
 X_train, scaler_X = utils_regressor.scaler_fit_transform(X_train,
                                                          scaler_choice_X)
@@ -163,10 +160,6 @@ utils.save_pickle_safe(path_optimization + 'cv_results_time_series.pkl',
 
 utils.save_pickle_safe(path_optimization + 'model_infos.pkl', model_infos, force_save=force_save)
 
-
-
-
-# Fit
 # Create manually the best_params
 #dict[int]['best_params_']
 #best_params = {'alpha': 0.2,'copy_X_train': True, 'kernel': None, 'n_restarts_optimizer': 0, 'normalize_y': True,
@@ -175,22 +168,26 @@ utils.save_pickle_safe(path_optimization + 'model_infos.pkl', model_infos, force
 
 best_params_time_series = utils.load_pickle(path_optimization + 'best_params_time_series.pkl')
 
-estimator_time_series = utils_regressor.fit_multioutput_regressor_multiseries_model(X_train, y_list_train,
-                                                                                    estimator_choice,
-                                                                                    best_params_time_series,
-                                                                                    n_jobs=max(n_jobs,n_jobs_cv))
+# Loop fit and predict
+preds = []
+for idx, i in enumerate(tqdm(time_series, desc='Loop fit and predict over time series (using low memory)')):
+    # Fit
+    estimator = utils_regressor.fit_multioutput_regressor_uniseries_model(X_train,
+                                                                          y_list_train[idx],
+                                                                          estimator_choice,
+                                                                          best_params_time_series[idx]['best_params_'],
+                                                                          n_jobs=max(n_jobs, n_jobs_cv))
+    # Predict
+    X = utils_regressor.scaler_transform(X, scaler_X)
+    pred = utils_regressor.predict_multioutput_regressor_uniseries_model(X, estimator)
+    pred = pred.reshape(1, pred.shape[0], pred.shape[1])
+    preds.append(pred)
 
+preds = np.concatenate(preds)
+preds = utils_regressor.scaler_inverse_transform(preds, scaler_Y)
+preds = preds.reshape(preds.shape[0], preds.shape[1]*preds.shape[2])
 
-
-# Predict
-
-X = utils_regressor.scaler_transform(X, scaler_X)
-pred = utils_regressor.predict_multioutput_regressor_multiseries_model(X, estimator_time_series)
-
-pred = utils_regressor.scaler_inverse_transform(pred, scaler_Y)
-pred = pred.reshape(pred.shape[0], pred.shape[1]*pred.shape[2])
-
-df = utils.pred_day_array_to_df(pred, time_series, days,
+df = utils.pred_day_array_to_df(preds, time_series, days,
                                 time_step_second=time_step_second, index=index)
 
 utils.df_to_csv_safe(path_prediction + start_datetime[:10] + '_' + end_datetime[:10] + '.csv',

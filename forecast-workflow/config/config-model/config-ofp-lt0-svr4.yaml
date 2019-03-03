@@ -305,7 +305,7 @@ end_datetime: '2017-12-31 23:45:00'
 
 # Variables optimization
 scaler_choice_X:
-scaler_choice_y:
+scaler_choice_y: 'minmax'
 
 start_datetime_optimization: '2015-01-01 00:00:00'
 end_datetime_optimization: '2016-12-31 23:45:00'
@@ -316,15 +316,15 @@ param_kfold:
     random_state: 1
 
 param_grid:
-    estimator__kernel: ['rbf', 'poly']
+    estimator__kernel: ['rbf', 'linear']
     estimator__degree: [3.0]
-    estimator__gamma: ['auto']
+    estimator__gamma: [1, 0.1, 0.01, 0.001]
     estimator__coef0: [0.0]
     estimator__tol: [0.001]
-    estimator__C: [1.0, 1.5]
+    estimator__C: [0.001, 0.01, 0.1, 1.0, 10]
     estimator__epsilon: [0.1]
     estimator__shrinking: [True]
-    estimator__cache_size: [300.0]
+    estimator__cache_size: [100.0]
     estimator__verbose: [False]
     estimator__max_iter: [-1]
 
@@ -335,7 +335,7 @@ param_grid:
 #    random_state: 1
 #
 #param_grid:
-#    estimator__kernel: ['rbf']
+#    estimator__kernel: ['linear']
 #    estimator__degree: [3.0]
 #    estimator__gamma: ['auto']
 #    estimator__coef0: [0.0]
@@ -345,7 +345,7 @@ param_grid:
 #    estimator__shrinking: [True]
 #    estimator__cache_size: [200.0]
 #    estimator__verbose: [False]
-#    estimator__max_iter: [1.0]
+#    estimator__max_iter: [-1]
 
 # Variables global
 index: 'Datetime'

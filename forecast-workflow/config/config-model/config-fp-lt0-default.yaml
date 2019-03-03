@@ -1,0 +1,48 @@
+features_time_step: ['1-start_event']
+
+features_day: ['Day_en', 'Mois']
+
+features_todummy: ['Day_en', 'Mois']
+
+time_series: ['11', '32', '34']
+
+
+start_datetime: '2015-01-01 00:00:00'
+end_datetime: '2015-02-07 23:45:00'
+
+# Variables model
+best_params_: 
+    estimator__kernel: 'rbf'
+    estimator__degree: 3.0
+    estimator__gamma: 'auto'
+    estimator__coef0: 0.0
+    estimator__tol: 0.001
+    estimator__C: 1.0
+    estimator__epsilon: 0.01
+    estimator__shrinking: True
+    estimator__cache_size: 10.0
+    estimator__verbose: False
+    estimator__max_iter: -1
+
+
+best_params_time_series: null
+
+# Variables optimization
+scaler_choice_X: 
+scaler_choice_y: 'standard'
+
+start_datetime_optimization: '2015-01-01 00:00:00'
+end_datetime_optimization: '2015-01-31 23:45:00'
+
+
+# Variables global
+index: 'Datetime'
+start_time: '00:00:00'
+end_time: '23:45:00'
+time_step_second: 900
+
+# Variables model
+model_name: 'test-fp-lt0-default'
+estimator_choice: 'svr'
+
+

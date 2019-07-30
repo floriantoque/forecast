@@ -1,8 +1,0 @@
-# Configuration of the optimization of the sarimax model
-
-
-path_model_predict: '/home/toque/data2/forecast/model/sarimax/predict/'
-path_model_infos: '/home/toque/data2/forecast/model/sarimax/optimize/sarimax_stm_aggday/model_infos.pkl'
-start_train: '2015-01-01'
-end_train: '2017-01-01'
-end_test: '2018-01-01'

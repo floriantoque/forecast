@@ -18,10 +18,10 @@ start_date_train: '2015'
 end_date_train: '2017'
 start_date_test: '2017'
 end_date_test: '2018'
-file_path_obs: ['/home/toque/data2/montreal/stm/data/valid_metro_2015_2016_2017_perpass_agregated/valid_metro_15min_2015_2016_2017_B-Mensuel_regional.csv']
-file_path_pred: ['/home/toque/data2/forecast/model/rf_uni_inverted/prediction/lt_rf_uni_inverted_passB/2015-01-01_2017-12-31.csv',
-                 '/home/toque/data2/forecast/model/rf_uni_inverted/prediction/lt_rf_uni_inverted_event_category_passB/2015-01-01_2017-12-31.csv']
-list_name_pred: ['lt_rf', 'lt_rf_event_category']
+file_path_obs: ['/home/toque/data2/montreal/stm/data/valid_metro_2015_2016_2017_perpass_agregated/valid_metro_15min_2015_2016_2017_nodayfree_B-Mensuel_regional.csv']
+file_path_pred: ['/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf2-passB/2015-01-01_2017-12-31.csv',
+                 '/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf4-passB/2015-01-01_2017-12-31.csv']
+list_name_pred: ['lt0_rf2_passB', 'lt0_rf4_passB']
 
 time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13', '14', '1', '9', '5', '18',
                '36', '24', '68', '43', '8', '64', '10', '55', '3', '49', '51', '2', '19', '56', '7', '6',

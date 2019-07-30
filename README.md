@@ -77,7 +77,7 @@ Configuration files are:
 # python <script_fit.py> --config config_fit.yaml
 ```
 
-#### 5) Optimize the model
+#### 5) Predict with the model
 ```
 # python <script_predict.py> --config config_predict.yaml
 ```

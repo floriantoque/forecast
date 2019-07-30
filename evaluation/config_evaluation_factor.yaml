@@ -1,0 +1,83 @@
+# Configuration of the learning step of the Random Forest model
+
+
+#start_date_train: string date, format 'YYYY-MM-dd hh:mm:ss',
+#end_date_train: string date, format 'YYYY-MM-dd hh:mm:ss',
+#start_date_test: string date, format 'YYYY-MM-dd hh:mm:ss',
+#end_date_test: string date, format 'YYYY-MM-dd hh:mm:ss',
+#file_path_obs: list of string file path of observation
+#file_path_pred: list of string file path of prediction
+#list_name_pred: list of string name of the prediction model
+#time_series: list string id of the time series
+#time_series_name: list of string of the time series name could be Null
+#directory_path_to_save: string directory path to save the evaluation files
+#name_evaluation: string name of the evaluation
+
+AT: 150
+start_date_train: '2015'
+end_date_train: '2017'
+start_date_test: '2017'
+end_date_test: '2018'
+file_path_obs: ['/home/toque/data2/montreal/stm/data/valid_metro_15min_2015_2016_2017_sumpass_nodayfree.csv']
+
+file_path_pred: [
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf1/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf2/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf3/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf4/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-en1/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-en2/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-en3/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-en4/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gp1/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gp2/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gp3/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gp4/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-ha1/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-ha2/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr1/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr2/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr3/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr4/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr1-v0/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr2-v0/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr3-v0/2015-01-01_2017-12-31-factor.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr4-v0/2015-01-01_2017-12-31-factor.csv",
+            ]
+
+
+list_name_pred: [ 'lt0-rf1','lt0-rf2','lt0-rf3','lt0-rf4',
+  'lt0-en1', 'lt0-en2', 'lt0-en3', 'lt0-en4',
+  'lt0-gp1', 'lt0-gp2', 'lt0-gp3', 'lt0-gp4',
+  'lt0-ha1', 'lt0-ha2',
+  'lt0-svr1', 'lt0-svr2', 'lt0-svr3', 'lt0-svr4',
+  'lt0-gbr1-v0','lt0-gbr2-v0','lt0-gbr3-v0','lt0-gbr4-v0', 
+  ]
+
+time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13', '14', '1', '9', '5', '18',
+               '36', '24', '68', '43', '8', '64', '10', '55', '3', '49', '51', '2', '19', '56', '7', '6',
+               '4', '48', '66', '25', '23', '28', '39', '54', '60', '27', '20', '46', '12', '21', '62', '52',
+               '41', '50', '30', '16', '37', '40', '26', '67', '57', '61', '42', '45', '38', '29', '58',
+               '63', '22', '59', '53', '17']
+
+time_series_name: ['Berri-UQAM', 'McGill', 'Guy-Concordia', 'Bonaventure',
+                   'Longueuil', 'Cote-Vertu', 'Place-des-Arts',
+                   'Peel', 'Atwater', 'Vendome', "Place-d'Armes",
+                   'Square-Victoria', 'Henri-Bourassa', 'Mont-Royal',
+                   'Jean-Talon', 'Honore-Beaugrand', 'Lionel-Groulx', 'Pie-IX',
+                   'Montmorency', 'Angrignon', 'Laurier', 'Saint-Michel',
+                   'Sherbrooke', 'Cote-des-Neiges', 'Cremazie', 'Snowdon',
+                   'Plamondon', 'Sauve', 'Radisson', 'Univ-de-Montreal',
+                   'Rosemont', 'Beaubien', 'Jarry', 'Villa-Maria', 'Cartier',
+                   'Joliette', 'Viau', 'Papineau', "De l'eglise", 'Du College',
+                   'Parc', 'Frontenac', 'Langelier', 'Place-St-Henri',
+                   'Champ-de-Mars', 'Station Cadillac', 'Station Fabre', 'Namur', 'Jolicoeur',
+                   'Cote-Ste-Catherine', 'Saint-Laurent', "Lucien-L'Allier",
+                   'Charlevoix', 'Verdun', 'Prefontaine', 'De la Concorde',
+                   'edouard-Montpetit', 'De Castelnau', 'Station Monk', 'Jean-Drapeau',
+                   'LaSalle', 'Beaudry', 'Outremont', "D'Iberville",
+                   'Assomption', 'Acadie', 'De la Savane', 'Georges-Vanier']
+#time_series_name:
+directory_path_to_save:  '/home/toque/data2/forecast/evaluation/'
+name_evaluation: 'eval_forecast_mtl_metro_factor'
+

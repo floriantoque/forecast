@@ -13,14 +13,14 @@
 #directory_path_to_save: string directory path to save the evaluation files
 #name_evaluation: string name of the evaluation
 
-AT: 5
+AT: 150
 start_date_train: '2015'
 end_date_train: '2017'
 start_date_test: '2017'
 end_date_test: '2018'
 file_path_obs: ['/home/toque/data2/montreal/stm/data/valid_metro_2015_2016_2017_perpass_agregated/valid_metro_15min_2015_2016_2017_nodayfree_C-Carnets_de_billets.csv']
-file_path_pred: ['/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf2-passC/2015-01-01_2017-12-31.csv',
-                 '/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf4-passC/2015-01-01_2017-12-31.csv']
+file_path_pred: ['/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf2-passC/2015-01-01_2017-12-31-factor.csv',
+                 '/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-rf4-passC/2015-01-01_2017-12-31-factor.csv']
 list_name_pred: ['lt0_rf2_passC','lt0_rf4_passC']
 
 
@@ -49,5 +49,5 @@ time_series_name: ['Berri-UQAM', 'McGill', 'Guy-Concordia', 'Bonaventure',
                    'Assomption', 'Acadie', 'De la Savane', 'Georges-Vanier']
 #time_series_name:
 directory_path_to_save:  '/home/toque/data2/forecast/evaluation/'
-name_evaluation: 'eval_forecast_mtl_metro_passC'
+name_evaluation: 'eval_forecast_mtl_metro_passC_factor'
 

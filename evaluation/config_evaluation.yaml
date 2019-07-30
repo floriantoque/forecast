@@ -13,7 +13,7 @@
 #directory_path_to_save: string directory path to save the evaluation files
 #name_evaluation: string name of the evaluation
 
-AT: 5
+AT: 150
 start_date_train: '2015'
 end_date_train: '2017'
 start_date_test: '2017'
@@ -56,6 +56,27 @@ file_path_pred: [ "/home/toque/data2/forecast/model/ha_inverted/prediction/lt_ha
   "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gp2/2015-01-01_2017-12-31.csv",
   "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gp3/2015-01-01_2017-12-31.csv",
   "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gp4/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-ha1/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-ha2/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr1-v0/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr2-v0/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr3-v0/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr1-v1/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr1-v2/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr1/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr2/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr3/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-svr4/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr1-v0/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr2-v0/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr3-v0/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr4-v0/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr3/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-gbr4/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-xgbr1/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-xgbr2/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-xgbr3/2015-01-01_2017-12-31.csv",
+  "/home/toque/data2/forecast/model/long-term/scikit-regressor/prediction/long-term0-xgbr4/2015-01-01_2017-12-31.csv",
                   ]
 
 
@@ -82,7 +103,12 @@ list_name_pred: [ 'lt_ha_invertedday',
   'lt0-lr1', 'lt0-lr2', 'lt0-lr3', 'lt0-lr4',
   'lt0-en1', 'lt0-en2', 'lt0-en3', 'lt0-en4',
   'lt0-gp1', 'lt0-gp2', 'lt0-gp3', 'lt0-gp4',
-                  ]
+  'lt0-ha1', 'lt0-ha2',
+  'lt0-svr1-v0', 'lt0-svr2-v0', 'lt0-svr3-v0', 'lt0-svr1-v1', 'lt0-svr1-v2',
+  'lt0-svr1', 'lt0-svr2', 'lt0-svr3', 'lt0-svr4',
+  'lt0-gbr1-v0','lt0-gbr2-v0','lt0-gbr3-v0','lt0-gbr4-v0', 'lt0-gbr3', 'lt0-gbr4', 
+  'lt0-xgbr1', 'lt0-xgbr2', 'lt0-xgbr3', 'lt0-xgbr4'
+  ]
 
 time_series: ['11', '32', '34', '15', '44', '65', '31', '33', '35', '47', '13', '14', '1', '9', '5', '18',
                '36', '24', '68', '43', '8', '64', '10', '55', '3', '49', '51', '2', '19', '56', '7', '6',
